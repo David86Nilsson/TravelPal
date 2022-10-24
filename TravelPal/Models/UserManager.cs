@@ -4,8 +4,27 @@ namespace TravelPal.Models;
 
 public class UserManager
 {
+    private TravelManager travelManager;
+
     public List<IUser> Users { get; set; } = new();
     public IUser SignedInUser;
+
+    public UserManager(TravelManager travelManager)
+    {
+        this.travelManager = travelManager;
+        CreateStartUsers();
+    }
+
+    // Creates users that exists when starting application
+    private void CreateStartUsers()
+    {
+        Admin admin = new("admin", "password", Enums.Countries.Sweden);
+        AddUser(admin);
+        User user = new("Gandalf", "password", Enums.Countries.Sweden);
+        user.AddTravel(travelManager.Travels[0]);
+        user.AddTravel(travelManager.Travels[1]);
+        AddUser(user);
+    }
 
     //Method that adds user to list
     public bool AddUser(IUser user)

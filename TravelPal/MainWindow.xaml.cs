@@ -1,28 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using TravelPal.Models;
 
-namespace TravelPal
+namespace TravelPal;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    private UserManager userManager;
+    private TravelManager travelManager;
+    public MainWindow()
     {
-        public MainWindow()
+        InitializeComponent();
+        travelManager = new();
+        userManager = new(travelManager);
+    }
+
+    private void ButtonLogIn_Click(object sender, RoutedEventArgs e)
+    {
+        if (!(txtUserName.Text.Trim() == null))
         {
-            InitializeComponent();
+            if (userManager.SignInUser(txtUserName.Text.Trim(), pwPassword.Password))
+            {
+                TravelsWindow travelsWindow = new TravelsWindow(userManager, travelManager);
+                travelsWindow.Show();
+                Close();
+            }
         }
+    }
+
+    private void ButtonRegister_Click(object sender, RoutedEventArgs e)
+    {
+
     }
 }

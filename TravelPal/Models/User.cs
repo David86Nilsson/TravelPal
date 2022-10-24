@@ -21,5 +21,9 @@ namespace TravelPal.Models
             Password = password;
             Location = location;
         }
+        public void AddTravel(Travel travel)
+        {
+            Travels.Add(travel);
+        }
     }
 }

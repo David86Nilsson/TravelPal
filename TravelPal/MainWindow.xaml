@@ -5,8 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Background="MediumSlateBlue">
+    <Grid Margin="50">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label
+                Content="Username: "
+                Foreground="MintCream"
+                FontSize="40"
+                Grid.Row="0"
+                Grid.Column="0"
+                />
+            <Label
+                Content="Password: "
+                Foreground="MintCream"
+                FontSize="40"
+                Grid.Row="1"
+                Grid.Column="0"
+                />
+            <TextBox
+                x:Name="txtUserName"
+                FontSize="30"
+                Grid.Row="0"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                />
+            <PasswordBox
+                x:Name="pwPassword"
+                FontSize="30"
+                Grid.Row="1"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                />
+            <Button
+                x:Name="ButtonLogIn"
+                Content="Log in"
+                FontSize="20"
+                Grid.Column="1"
+                Grid.Row="2"
+                Width="100"
+                Height="30"
+                HorizontalAlignment="Right"
+                Margin="5"
+                Click="ButtonLogIn_Click"
+                />
+            <Button
+                x:Name="ButtonRegister"
+                Content="Register"
+                FontSize="20"
+                Grid.Column="1"
+                Grid.Row="3"
+                Width="100"
+                Height="30"
+                HorizontalAlignment="Right"
+                Margin="5"
+                Click="ButtonRegister_Click"
+                />
+        </Grid>
+        <Label
+            Content="TravelPal"
+            FontFamily="Arial"
+            FontSize="80"
+            Foreground="MintCream"
+            HorizontalAlignment="Center"
+            />
     </Grid>
 </Window>
