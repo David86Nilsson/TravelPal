@@ -7,19 +7,19 @@ namespace TravelPal.Models
     {
         public string UserName { get; set; }
         public string Password { get; set; }
-        public Countries Country { get; set; }
+        public Countries Location { get; set; }
         public List<Travel> Travels { get; set; } = new();
 
-        public User(string userName, string password, Countries country)
+        public User(string userName, string password, Countries location)
         {
-            IUser(userName, password, country);
+            IUser(userName, password, location);
         }
 
-        public void IUser(string userName, string password, Countries country)
+        public void IUser(string userName, string password, Countries location)
         {
             UserName = userName;
             Password = password;
-            Country = country;
+            Location = location;
         }
     }
 }

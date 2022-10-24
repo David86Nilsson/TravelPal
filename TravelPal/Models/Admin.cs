@@ -1,12 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TravelPal.Enums;
 
 namespace TravelPal.Models
 {
-    internal class Admin
+    public class Admin : IUser
     {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public Countries Location { get; set; }
+
+        public Admin(string userName, string password, Countries location)
+        {
+            IUser(userName, password, location);
+        }
+
+        public void IUser(string userName, string password, Countries location)
+        {
+            UserName = userName;
+            Password = password;
+            Location = location;
+        }
     }
 }
