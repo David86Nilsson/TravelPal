@@ -48,7 +48,6 @@ public class UserManager
         }
         return false;
     }
-
     //Checks if Username exists
     private bool ValidateUserName(string userName)
     {

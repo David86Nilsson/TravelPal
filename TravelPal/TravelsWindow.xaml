@@ -36,7 +36,7 @@
                 Width="150"
                 Height="30"
                 HorizontalAlignment="Center"
-                Margin="5"
+                Margin="5" Click="ButtonUserDetails_Click"
                 />
                 <Button
                 x:Name="ButtonAddTravel"

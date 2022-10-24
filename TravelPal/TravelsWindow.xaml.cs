@@ -31,5 +31,13 @@ namespace TravelPal
                 lvTravels.Items.Add(item);
             }
         }
+
+        private void ButtonUserDetails_Click(object sender, RoutedEventArgs e)
+        {
+            User user = (User)userManager.SignedInUser;
+            UserDetailsWindow userDetailsWindow = new(user);
+            userDetailsWindow.Show();
+            Close();
+        }
     }
 }
