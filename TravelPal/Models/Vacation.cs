@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TravelPal.Enums;
 
-namespace TravelPal.Models
+namespace TravelPal.Models;
+
+public class Vacation : Travel
 {
-    internal class Vacation
+    public bool AllInclusive { get; set; }
+    public Vacation(string destination, Countries country, int travellers, bool allInclusive) : base(destination, country, travellers)
     {
+        AllInclusive = allInclusive;
+    }
+
+    // returns information about vacation
+    public override string GetInfo()
+    {
+        if (AllInclusive)
+        {
+            return $"{base.GetInfo()} Has All Inclusive ";
+        }
+        else
+        {
+            return $"{base.GetInfo()} Doesn´t Have All Inclusive ";
+        }
     }
 }
