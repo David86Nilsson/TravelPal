@@ -48,6 +48,11 @@ public class UserManager
         }
         return false;
     }
+    public bool UpdatePassword(IUser user, string password)
+    {
+        user.Password = password;
+        return true;
+    }
     //Checks if Username exists
     private bool ValidateUserName(string userName)
     {

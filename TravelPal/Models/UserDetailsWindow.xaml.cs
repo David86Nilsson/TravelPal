@@ -54,7 +54,7 @@ namespace TravelPal.Models
         {
             if (txtUserName.Text.Length > 3)
             {
-                if (userManager.UpdateUserName(user, txtUserName.Text))
+                if (userManager.UpdateUserName(user, txtUserName.Text.Trim()))
                 {
                     txtUserName.Clear();
                 }
@@ -63,8 +63,22 @@ namespace TravelPal.Models
             {
                 MessageBox.Show("UserName must be longer than 3 characters");
             }
-            if (txtPassword.Text.Trim().Length > 5)
-                HideEditBoxes();
+            if (txtPassword.Text.Trim().Length >= 5)
+            {
+                if (userManager.UpdatePassword(user, txtPassword.Text.Trim()))
+                {
+                    txtPassword.Clear();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Password must be at least 5 characters");
+            }
+            if ()
+            {
+
+            }
+            HideEditBoxes();
         }
     }
 }
