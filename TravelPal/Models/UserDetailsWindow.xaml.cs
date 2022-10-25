@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Text;
+using System.Windows;
+using TravelPal.Enums;
 
 namespace TravelPal.Models
 {
@@ -9,20 +12,33 @@ namespace TravelPal.Models
     {
         private User user;
         private UserManager userManager;
-        public UserDetailsWindow(User user, UserManager userManager)
+        private TravelManager travelManager;
+        public UserDetailsWindow(User user, UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             this.user = user;
             this.userManager = userManager;
+            this.travelManager = travelManager;
+            PopulateComboBox();
             ShowInfo();
             HideEditBoxes();
+        }
+
+        private void PopulateComboBox()
+        {
+            cbCountries.ItemsSource = Enum.GetNames(typeof(Countries));
+            cbCountries.Text = user.Location.ToString();
         }
 
         private void ShowInfo()
         {
             lblUserName.Content = user.UserName;
+            lblUserName.Visibility = Visibility.Visible;
             lblPassword.Content = user.Password;
+            lblPassword.Visibility = Visibility.Visible;
             lblCountry.Content = user.Location;
+            lblCountry.Visibility = Visibility.Visible;
+
         }
 
         private void HideEditBoxes()
@@ -35,9 +51,24 @@ namespace TravelPal.Models
             lblConfirmPassword.Visibility = Visibility.Collapsed;
         }
 
+        private void ClearTextBoxes()
+        {
+            txtConfirmPassword.Clear();
+            txtPassword.Clear();
+            txtUserName.Clear();
+        }
+
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
             ShowEditBoxes();
+            HideInfo();
+        }
+
+        private void HideInfo()
+        {
+            lblUserName.Visibility = Visibility.Collapsed;
+            lblPassword.Visibility = Visibility.Collapsed;
+            lblCountry.Visibility = Visibility.Collapsed;
         }
 
         private void ShowEditBoxes()
@@ -48,37 +79,51 @@ namespace TravelPal.Models
             txtPassword.Visibility = Visibility.Visible;
             ButtonSave.Visibility = Visibility.Visible;
             lblConfirmPassword.Visibility = Visibility.Visible;
+
+            txtUserName.Text = user.UserName;
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            if (txtUserName.Text.Length > 3)
+            StringBuilder errorMessage = new();
+            if (!userManager.UpdateUserName(user, txtUserName.Text.Trim()))
             {
-                if (userManager.UpdateUserName(user, txtUserName.Text.Trim()))
-                {
-                    txtUserName.Clear();
-                }
+                txtUserName.Clear();
+                errorMessage.Append("\n*UserName must be longer than 3 characters");
             }
-            else
+
+            if (txtPassword.Text.Equals(txtConfirmPassword.Text))
             {
-                MessageBox.Show("UserName must be longer than 3 characters");
-            }
-            if (txtPassword.Text.Trim().Length >= 5)
-            {
-                if (userManager.UpdatePassword(user, txtPassword.Text.Trim()))
+                if (!userManager.UpdatePassword(user, txtPassword.Text.Trim()))
                 {
                     txtPassword.Clear();
+                    txtConfirmPassword.Clear();
+                    errorMessage.Append("\n*Password must be at least 5 characters");
                 }
             }
             else
             {
-                MessageBox.Show("Password must be at least 5 characters");
+                errorMessage.Append("\n*Password must be the same in both inputs");
             }
-            if ()
-            {
 
+            if (errorMessage.ToString().Length > 0)
+            {
+                MessageBox.Show(errorMessage.ToString());
             }
-            HideEditBoxes();
+            else
+            {
+                ClearTextBoxes();
+                HideEditBoxes();
+                ShowInfo();
+            }
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+
+            TravelsWindow travelsWindow = new(userManager, travelManager);
+            travelsWindow.Show();
+            Close();
         }
     }
 }

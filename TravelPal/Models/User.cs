@@ -25,5 +25,10 @@ namespace TravelPal.Models
         {
             Travels.Add(travel);
         }
+
+        internal void RemoveTravel(Travel selectedTravel)
+        {
+            Travels.Remove(selectedTravel);
+        }
     }
 }

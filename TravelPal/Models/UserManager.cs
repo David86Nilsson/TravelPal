@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace TravelPal.Models;
 
 public class UserManager
 {
     private TravelManager travelManager;
-
+    public StringBuilder errorMessage { get; set; }
     public List<IUser> Users { get; set; } = new();
     public IUser SignedInUser;
 
     public UserManager(TravelManager travelManager)
     {
         this.travelManager = travelManager;
+        errorMessage = new();
         CreateStartUsers();
     }
 
@@ -29,8 +31,15 @@ public class UserManager
     //Method that adds user to list
     public bool AddUser(IUser user)
     {
-        Users.Add(user);
-        return true;
+        errorMessage.Clear();
+        bool isUserNameValidated = ValidateUserName(user.UserName);
+        bool isPasswordValidated = ValidatePassword(user.Password);
+        if (isUserNameValidated && isPasswordValidated)
+        {
+            Users.Add(user);
+            return true;
+        }
+        return false;
     }
 
     //Method that removes user from list
@@ -41,6 +50,7 @@ public class UserManager
     //Updates the Username of user
     public bool UpdateUserName(IUser user, string userName)
     {
+        errorMessage.Clear();
         if (ValidateUserName(userName))
         {
             user.UserName = userName;
@@ -50,23 +60,44 @@ public class UserManager
     }
     public bool UpdatePassword(IUser user, string password)
     {
-        user.Password = password;
-        return true;
-    }
-    //Checks if Username exists
-    private bool ValidateUserName(string userName)
-    {
-        foreach (var user in Users)
+        if (ValidatePassword(password))
         {
-            if (user.UserName == userName)
-            {
-                return true;
-            }
+            user.Password = password;
+            return true;
         }
         return false;
     }
 
-    //Method that sets current user if log in i s correct
+    private bool ValidatePassword(string password)
+    {
+        if (password.Length < 5)
+        {
+            errorMessage.AppendLine("*Password was too short");
+            return false;
+        }
+        return true;
+    }
+
+    //Checks if new username is approved 
+    private bool ValidateUserName(string userName)
+    {
+        if (userName.Length <= 3)
+        {
+            errorMessage.AppendLine("*Username was too short");
+            return false;
+        }
+        foreach (var user in Users)
+        {
+            if (userName == user.UserName)
+            {
+                errorMessage.AppendLine("*Username already exists");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Method that sets current user if log in is correct
     public bool SignInUser(string userName, string password)
     {
         foreach (var user in Users)
@@ -79,5 +110,9 @@ public class UserManager
 
         }
         return false;
+    }
+    public string GetErrorMessage()
+    {
+        return errorMessage.ToString();
     }
 }

@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -28,11 +28,34 @@
             <StackPanel
                 Orientation="Horizontal"
                 Grid.Row="0"
-                Grid.Column="0">
+                Grid.Column="1"
+                HorizontalAlignment="Right">
                 <Button
                 x:Name="ButtonUserDetails"
-                Content="User Details"
-                FontSize="20"
+                Content="User"
+                Width="100"
+                Height="30"
+                HorizontalAlignment="Center"
+                Margin="5" Click="ButtonUserDetails_Click"
+                />
+                <Button
+                x:Name="ButtonLogOut"
+                Content="Log out"
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                Width="100"
+                Height="30"
+                Margin="5" Click="ButtonLogOut_Click"
+                />
+            </StackPanel>
+            <StackPanel
+                Orientation="Horizontal"
+                Grid.Row="0"
+                Grid.Column="0">
+                <Button
+                x:Name="ButtonTravelDetail"
+                Content="Travel Details"
                 Width="150"
                 Height="30"
                 HorizontalAlignment="Center"
@@ -41,11 +64,20 @@
                 <Button
                 x:Name="ButtonAddTravel"
                 Content="Add Travel"
-                FontSize="20"
                 Width="150"
                 Height="30"
                 HorizontalAlignment="Center"
                 Margin="5"
+                Click="ButtonAddTravel_Click"
+                />
+                <Button
+                x:Name="ButtonRemoveTravel"
+                Content="Remove Travel"
+                Width="150"
+                Height="30"
+                HorizontalAlignment="Center"
+                Margin="5"
+                Click="ButtonRemoveTravel_Click"
                 />
             </StackPanel>
             <Label
@@ -56,6 +88,7 @@
                 Grid.Column="1"
                 Grid.Row="0"
                 />
+
             <ListView
                 x:Name="lvTravels"
                 Grid.Column="0"
@@ -64,6 +97,7 @@
                 Height="300"
                 HorizontalAlignment="Left"
                 />
+
         </Grid>
 
         <Label

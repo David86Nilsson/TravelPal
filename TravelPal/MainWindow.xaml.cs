@@ -16,22 +16,31 @@ public partial class MainWindow : Window
         travelManager = new();
         userManager = new(travelManager);
     }
+    public MainWindow(UserManager userManager, TravelManager travelManager)
+    {
+        InitializeComponent();
+        this.userManager = userManager;
+        this.travelManager = travelManager;
+    }
 
     private void ButtonLogIn_Click(object sender, RoutedEventArgs e)
     {
-        if (!(txtUserName.Text.Trim() == null))
+        if (userManager.SignInUser(txtUserName.Text.Trim(), pwPassword.Password))
         {
-            if (userManager.SignInUser(txtUserName.Text.Trim(), pwPassword.Password))
-            {
-                TravelsWindow travelsWindow = new TravelsWindow(userManager, travelManager);
-                travelsWindow.Show();
-                Close();
-            }
+            TravelsWindow travelsWindow = new TravelsWindow(userManager, travelManager);
+            travelsWindow.Show();
+            Close();
+        }
+        else
+        {
+            MessageBox.Show("Username or password was incorrect");
         }
     }
 
     private void ButtonRegister_Click(object sender, RoutedEventArgs e)
     {
-
+        RegisterWindow registerWindow = new(userManager, travelManager);
+        registerWindow.Show();
+        Close();
     }
 }
