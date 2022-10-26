@@ -17,6 +17,6 @@ public class Travel
 
     public virtual string GetInfo()
     {
-        return Destination;
+        return $"{Destination}";
     }
 }

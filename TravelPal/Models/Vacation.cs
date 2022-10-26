@@ -15,11 +15,11 @@ public class Vacation : Travel
     {
         if (AllInclusive)
         {
-            return $"{base.GetInfo()} Has All Inclusive ";
+            return $"{base.GetInfo()} | Vacation with All Inclusive";
         }
         else
         {
-            return $"{base.GetInfo()} Doesn´t Have All Inclusive ";
+            return $"{base.GetInfo()} | Vacation without All Inclusive";
         }
     }
 }

@@ -13,6 +13,6 @@ public class Trip : Travel
     //returns the trip as a string
     public override string GetInfo()
     {
-        return $"From:{base.Country} /  To:{base.Destination} / {Type.ToString()}";
+        return $"From:{base.Country} |  To:{base.Destination} | {Type.ToString()}";
     }
 }

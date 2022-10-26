@@ -68,7 +68,9 @@ namespace TravelPal
 
         private void ButtonAddTravel_Click(object sender, RoutedEventArgs e)
         {
-
+            AddTravelWindow addTravelWindow = new(userManager, travelManager);
+            addTravelWindow.Show();
+            Close();
         }
     }
 }
