@@ -28,6 +28,11 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Label
@@ -38,23 +43,9 @@
                 Foreground="MintCream"
                 />
             <Label
-                x:Name= "lblCountry"
-                Grid.Row="1"
-                Grid.Column="1"
-                FontSize="30"
-                Foreground="MintCream"
-                />
-            <Label
                 Content="Country: "
                 Grid.Row="2"
                 Grid.Column="0"
-                Foreground="MintCream"
-                FontSize="30"
-                />
-            <Label 
-                x:Name="lblUserName"
-                Grid.Row="2"
-                Grid.Column="1"
                 Foreground="MintCream"
                 FontSize="30"
                 />
@@ -66,51 +57,39 @@
                 Foreground="MintCream"
                 />
             <Label
-                x:Name="lblPassword"
-                Grid.Row="3"
-                Grid.Column="1"
-                FontSize="30"
-                Foreground="MintCream"
-                />
-            <Label
-                x:Name="lblConfirmPassword"
-                Content="Confirm Password:"
+                Content="Trip or Vacation:"
                 Grid.Row="4"
                 Grid.Column="0"
                 FontSize="30"
                 Foreground="MintCream"
                 />
-
+            <Label
+                x:Name ="lblAllInclusiveOrTripType"
+                Grid.Row="5"
+                Grid.Column="0"
+                FontSize="30"
+                Foreground="MintCream"
+                />
             <Button
-                x:Name="ButtonEdit"
+                x:Name="ButtonEditSave"
                 Content="Edit"
                 Width="100"
                 Height="30"
                 HorizontalAlignment="Right"
-                Grid.Row="5"
+                Grid.Row="8"
                 Grid.Column="1"
-                Click="ButtonEdit_Click"
+                Click="ButtonEditSave_Click"
                 />
-            <Button
-                x:Name="ButtonSave"
-                Content="Save"
-                Width="100"
-                Height="30"
-                HorizontalAlignment="Right"
-                Grid.Row="6"
-                Grid.Column="1"
-                Click="ButtonSave_Click"
-                />
-            <ComboBox
-                x:Name="cbCountries"
+            <TextBox
+                x:Name="txtDestination"
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="150"
                 Height="30"
                 HorizontalAlignment="Right"
                 />
-            <TextBox
-                x:Name="txtUserName"
+            <ComboBox
+                x:Name="cbCountries"
                 Grid.Row="2"
                 Grid.Column="1"
                 Width="150"
@@ -118,30 +97,45 @@
                 HorizontalAlignment="Right"
                 />
             <TextBox
-                x:Name="txtPassword"
+                x:Name="txtNumberOfTravelers"
                 Grid.Row="3"
                 Grid.Column="1"
                 Width="150"
                 Height="30"
                 HorizontalAlignment="Right"               
                 />
-            <TextBox
-                x:Name="txtConfirmPassword"
+            <ComboBox
+                x:Name="cbTripOrVacation"
                 Grid.Row="4"
+                Grid.Column="1"
+                Width="150"
+                Height="30"
+                HorizontalAlignment="Right" SelectionChanged="cbTripOrVacation_SelectionChanged"               
+                />
+            <ComboBox
+                x:Name="cbTripType"
+                Grid.Row="5"
                 Grid.Column="1"
                 Width="150"
                 Height="30"
                 HorizontalAlignment="Right"               
                 />
             <Button
-                x:Name="ButtonClose"
-                Content="Close Window"
+                x:Name="ButtonCancel"
+                Content="Cancel"
                 Grid.Column="4"
                 Grid.Row="0"
                 Height="30"
                 Width="100"
                 HorizontalAlignment="Right"
-                Click="ButtonClose_Click"
+                Click="ButtonCancel_Click"
+                />
+            <CheckBox
+                x:Name="CheckBoxAllInclusive"
+                Grid.Row="5"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 />
 
         </Grid>

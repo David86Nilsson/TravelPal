@@ -26,9 +26,15 @@ namespace TravelPal.Models
             Travels.Add(travel);
         }
 
-        internal void RemoveTravel(Travel selectedTravel)
+        public void RemoveTravel(Travel travel)
         {
-            Travels.Remove(selectedTravel);
+            Travels.Remove(travel);
+        }
+        public void UpdateTravel(Travel oldTravel, Travel newTravel)
+        {
+            int index = Travels.IndexOf(oldTravel);
+            Travels.Insert(index, newTravel);
+            RemoveTravel(oldTravel);
         }
     }
 }

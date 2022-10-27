@@ -10,13 +10,13 @@ namespace TravelPal.Models
     /// </summary>
     public partial class UserDetailsWindow : Window
     {
-        private User user;
+        private IUser iUser;
         private UserManager userManager;
         private TravelManager travelManager;
-        public UserDetailsWindow(User user, UserManager userManager, TravelManager travelManager)
+        public UserDetailsWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
-            this.user = user;
+            this.iUser = userManager.SignedInUser;
             this.userManager = userManager;
             this.travelManager = travelManager;
             PopulateComboBox();
@@ -27,16 +27,17 @@ namespace TravelPal.Models
         private void PopulateComboBox()
         {
             cbCountries.ItemsSource = Enum.GetNames(typeof(Countries));
-            cbCountries.Text = user.Location.ToString();
+            cbCountries.Text = iUser.Location.ToString();
         }
 
         private void ShowInfo()
         {
-            lblUserName.Content = user.UserName;
+            lblUserNameOrAdminName.Content = $"{iUser.GetType().Name}Name:";
+            lblUserName.Content = iUser.UserName;
             lblUserName.Visibility = Visibility.Visible;
-            lblPassword.Content = user.Password;
+            lblPassword.Content = iUser.Password;
             lblPassword.Visibility = Visibility.Visible;
-            lblCountry.Content = user.Location;
+            lblCountry.Content = iUser.Location;
             lblCountry.Visibility = Visibility.Visible;
 
         }
@@ -80,13 +81,13 @@ namespace TravelPal.Models
             ButtonSave.Visibility = Visibility.Visible;
             lblConfirmPassword.Visibility = Visibility.Visible;
 
-            txtUserName.Text = user.UserName;
+            txtUserName.Text = iUser.UserName;
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errorMessage = new();
-            if (!userManager.UpdateUserName(user, txtUserName.Text.Trim()))
+            if (!userManager.UpdateUserName(iUser, txtUserName.Text.Trim()))
             {
                 txtUserName.Clear();
                 errorMessage.Append("\n*UserName must be longer than 3 characters");
@@ -94,7 +95,7 @@ namespace TravelPal.Models
 
             if (txtPassword.Text.Equals(txtConfirmPassword.Text))
             {
-                if (!userManager.UpdatePassword(user, txtPassword.Text.Trim()))
+                if (!userManager.UpdatePassword(iUser, txtPassword.Text.Trim()))
                 {
                     txtPassword.Clear();
                     txtConfirmPassword.Clear();

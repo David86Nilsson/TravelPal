@@ -45,7 +45,7 @@
                 Foreground="MintCream"
                 />
             <Label
-                Content="Username: "
+                x:Name="lblUserNameOrAdminName"
                 Grid.Row="2"
                 Grid.Column="0"
                 Foreground="MintCream"

@@ -32,4 +32,9 @@ public class TravelManager
     {
         Travels.Remove(travel);
     }
+
+    public void UpdateTravel(Travel oldTravel, Travel newTravel)
+    {
+        oldTravel = newTravel;
+    }
 }

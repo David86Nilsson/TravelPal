@@ -19,27 +19,50 @@ namespace TravelPal
             InitializeComponent();
             this.userManager = userManager;
             this.travelManager = travelManager;
-            user = (User)userManager.SignedInUser;
             PopulateListView();
         }
 
         private void PopulateListView()
         {
-            foreach (Travel t in user.Travels)
+            if (userManager.SignedInUser is User)
             {
-                ListViewItem item = new();
-                item.Content = t.GetInfo();
-                item.Tag = t;
-                lvTravels.Items.Add(item);
+                user = (User)userManager.SignedInUser;
+                foreach (Travel travel in user.Travels)
+                {
+                    ListViewItem item = new();
+                    item.Content = travel.GetInfo();
+                    item.Tag = travel;
+                    lvTravels.Items.Add(item);
+                }
+            }
+            else if (userManager.SignedInUser is Admin)
+            {
+                foreach (Travel travel in travelManager.Travels)
+                {
+                    ListViewItem item = new();
+                    item.Content = travel.GetInfo();
+                    item.Tag = travel;
+                    lvTravels.Items.Add(item);
+                }
             }
         }
 
         private void ButtonUserDetails_Click(object sender, RoutedEventArgs e)
         {
-            User user = (User)userManager.SignedInUser;
-            UserDetailsWindow userDetailsWindow = new(user, userManager, travelManager);
-            userDetailsWindow.Show();
-            Close();
+            if (userManager.SignedInUser is User)
+            {
+                User user = (User)userManager.SignedInUser;
+                UserDetailsWindow userDetailsWindow = new(userManager, travelManager);
+                userDetailsWindow.Show();
+                Close();
+            }
+            else if (userManager.SignedInUser is Admin)
+            {
+                Admin admin = (Admin)userManager.SignedInUser;
+                UserDetailsWindow userDetailsWindow = new(userManager, travelManager);
+                userDetailsWindow.Show();
+                Close();
+            }
         }
 
         private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
@@ -71,6 +94,24 @@ namespace TravelPal
             AddTravelWindow addTravelWindow = new(userManager, travelManager);
             addTravelWindow.Show();
             Close();
+        }
+
+        private void ButtonTravelDetail_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ListViewItem item = (ListViewItem)lvTravels.SelectedItem;
+                item = (ListViewItem)lvTravels.SelectedItem;
+                Travel selectedTravel = (Travel)item.Tag;
+                TravelDetailsWindow travelDetailsWindow = new(userManager, travelManager, selectedTravel);
+                travelDetailsWindow.Show();
+                Close();
+
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Please choose a travel to see details for");
+            }
         }
     }
 }
