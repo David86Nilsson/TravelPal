@@ -238,8 +238,7 @@ namespace TravelPal.Enums
         Saint_Martin,
         [Display(Name = "Saint Pierre and Miquelon")]
         Saint_Pierre_and_Miquelon,
-        [Display(Name = "Saint Vincent and Grenadines")]
-        Saint_Vincent_and_Grenadines,
+        [Display(Name = "Saint Vincent and Grenadines")] Saint_Vincent_and_Grenadines,
         Samoa,
         [Display(Name = "San Marino")]
         San_Marino,

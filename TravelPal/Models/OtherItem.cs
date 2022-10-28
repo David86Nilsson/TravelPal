@@ -10,6 +10,7 @@
             Quantity = quantity;
         }
 
+        //Returns info about the item
         public string GetInfo()
         {
             return $"{Name} | Quantity:{Quantity}";

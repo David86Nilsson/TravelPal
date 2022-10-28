@@ -17,6 +17,8 @@
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -70,14 +72,58 @@
                 FontSize="30"
                 Foreground="MintCream"
                 />
+            <Label
+                Content ="Start Date:"
+                Grid.Row="6"
+                Grid.Column="0"
+                FontSize="30"
+                Foreground="MintCream"
+                />
+            <Label
+                Content ="End Date:"
+                Grid.Row="7"
+                Grid.Column="0"
+                FontSize="30"
+                Foreground="MintCream"
+                />
+            <Label
+                Content ="TravelDays:"
+                Grid.Row="8"
+                Grid.Column="0"
+                FontSize="30"
+                Foreground="MintCream"
+                />
+            <Label
+                x:Name ="lblStartDate"
+                Grid.Row="6"
+                Grid.Column="1"
+                FontSize="30"
+                Foreground="MintCream"
+                />
+            <Label
+                x:Name ="lblEndDate"
+                Grid.Row="7"
+                Grid.Column="1"
+                FontSize="30"
+                Foreground="MintCream"
+                />
+            <Label
+                x:Name ="lblTraveldays"
+                Grid.Row="8"
+                Grid.Column="1"
+                FontSize="30"
+                Foreground="MintCream"
+                />
+
             <Button
                 x:Name="ButtonEditSave"
                 Content="Edit"
                 Width="100"
                 Height="30"
                 HorizontalAlignment="Right"
-                Grid.Row="8"
-                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                Grid.Row="9"
+                Grid.Column="4"
                 Click="ButtonEditSave_Click"
                 />
             <TextBox
@@ -123,7 +169,7 @@
             <Button
                 x:Name="ButtonCancel"
                 Content="Cancel"
-                Grid.Column="4"
+                Grid.Column="5"
                 Grid.Row="0"
                 Height="30"
                 Width="100"
@@ -137,6 +183,130 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 />
+            <CheckBox
+                x:Name="CheckBoxRequired"
+                Content="Required"
+                Grid.Row="3"
+                Grid.Column="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Top"
+                Foreground="MintCream"
+                />
+            <Calendar
+                x:Name="CalendarFromDate"
+                SelectionMode="SingleDate"
+                Background="MintCream"
+                Grid.Row="9"
+                Grid.Column="0"
+                Grid.RowSpan="4"
+                Grid.ColumnSpan="2"
+                Height="200" 
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                SelectedDatesChanged="Calendar_SelectedDatesChanged"
+                />
+            <Calendar
+                x:Name="CalendarToDate"
+                SelectionMode="SingleDate"
+                Grid.Row="9"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="4"
+                HorizontalAlignment="Right"
+                SelectedDatesChanged="Calendar_SelectedDatesChanged"
+                />
+            <StackPanel
+                x:Name="StackPanelItem"
+                Grid.Row="1"
+                Grid.Column="3"
+                Orientation="Vertical"
+                Grid.ColumnSpan="3"
+                Grid.RowSpan="4"
+                >
+                <Label
+                Content="Packinglistitem to add: "
+                Grid.Row="1"
+                Grid.Column="3"
+                Grid.ColumnSpan="3"
+                Foreground="MintCream"
+                FontSize="30"
+                />
+                <TextBox
+                x:Name="txtPackingListItem"
+                Grid.Row="2"
+                Grid.Column="3"
+                Grid.ColumnSpan="2"
+                Width="150"
+                Height="30"
+                HorizontalAlignment="Left"
+                />
+                <CheckBox
+                x:Name="CheckBoxTravelDocument"
+                Content="Document"
+                Grid.Row="3"
+                Grid.Column="3"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Top"
+                Checked="CheckBoxTravelDocument_Checked"
+                Unchecked="CheckBoxTravelDocument_Unchecked"
+                Margin="0,5,0,0"
+                Foreground="MintCream"
+                />
+                <StackPanel 
+                x:Name="StackPanelNumberofItems"  
+                Grid.Row="4" 
+                Grid.Column="3"
+                Orientation="Horizontal"
+                Margin="0,5,0,0">
+                    <TextBox
+                    x:Name="txtQuantity"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                />
+                    <Label
+                    x:Name="lblQuantity"
+                    Foreground="MintCream"
+                    Content="Quantity"
+                    VerticalAlignment="Center"
+                    />
+
+                </StackPanel>
+                
+                <Button
+                x:Name="ButtonAddItem"
+                Content="Add Item"
+                Height="30"
+                Width="100"
+                Click="ButtonAddItem_Click"
+                HorizontalAlignment="Left"
+                Margin="0,5,0,0"
+                />
+            </StackPanel>
+            <StackPanel
+                Grid.Row="5"
+                Grid.Column="3"
+                Grid.ColumnSpan="3"
+                Grid.RowSpan="3">
+                <Label
+                Content="Packing list: "
+                Grid.Row="4"
+                Grid.Column="3"
+                Grid.ColumnSpan="2"
+                FontSize="30"
+                Foreground="MintCream"
+                />
+                <ListView
+                x:Name="lvPackingList"
+                HorizontalAlignment="Left"
+                Width="300"
+                Height="100"
+                />
+            </StackPanel>
 
         </Grid>
         <Label

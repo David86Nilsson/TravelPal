@@ -19,6 +19,7 @@ namespace TravelPal
             InitializeComponent();
             this.userManager = userManager;
             this.travelManager = travelManager;
+            lblUserInfo.Content = userManager.SignedInUser.UserName;
             PopulateListView();
         }
 
@@ -78,8 +79,7 @@ namespace TravelPal
             {
                 ListViewItem item = (ListViewItem)lvTravels.SelectedItem;
                 Travel selectedTravel = (Travel)item.Tag;
-                travelManager.RemoveTravel(selectedTravel);
-                user.RemoveTravel(selectedTravel);
+                travelManager.RemoveTravel(selectedTravel, userManager);
                 lvTravels.Items.Clear();
                 PopulateListView();
             }

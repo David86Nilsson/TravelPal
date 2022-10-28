@@ -103,7 +103,7 @@
                 HorizontalAlignment="Right"
                 Grid.Row="10"
                 Grid.Column="4"
-                Click="ButtonAdd_Click"
+                Click="ButtonAddTravel_Click"
                 />
             <ComboBox
                 x:Name="cbCountries"
@@ -227,9 +227,11 @@
                 Grid.Column="3"
                 Grid.ColumnSpan="4"
                 Grid.RowSpan="2"
-                Width="500"
+                HorizontalAlignment="Left"
+                Width="300"
                 Height="100"
                 Foreground="MediumSlateBlue"
+                
                 />
             <Calendar
                 x:Name="CalendarFromDate"

@@ -15,11 +15,14 @@ public class TravelManager
     }
 
 
-    // Creates some travels when start app
+    // Creates some travels when starting app
     private void CreateStartTravels()
     {
-        Trip trip1 = new("Paris", Enums.Countries.Sweden, 3, Enums.TripTypes.Leisure);
-        Trip trip2 = new("London", Enums.Countries.Sweden, 2, Enums.TripTypes.Work);
+        DateTime start = DateTime.Now;
+        DateTime end = DateTime.Now.AddDays(3);
+        Trip trip1 = new("Paris", Enums.Countries.France, 3, null, start, end, Enums.TripTypes.Leisure);
+        end = DateTime.Now.AddDays(5);
+        Trip trip2 = new("Sydney", Enums.Countries.Australia, 2, null, start, end, Enums.TripTypes.Work);
         AddTravel(trip1);
         AddTravel(trip2);
     }
@@ -31,19 +34,44 @@ public class TravelManager
     }
 
     //Removes a travel from list
-    public void RemoveTravel(Travel travel)
+    public void RemoveTravel(Travel travel, UserManager userManager)
     {
         Travels.Remove(travel);
+        if (userManager.SignedInUser is User) //If its a User, removes Travel from user
+        {
+            User user = (User)userManager.SignedInUser;
+            user.RemoveTravel(travel);
+        }
+        else // If its a Admin, removes Travel from user 
+        {
+            foreach (IUser iUser in userManager.Users)
+            {
+                if (iUser is User)
+                {
+                    User user = (User)iUser;
+                    List<Travel> travels = user.Travels;
+                    for (int i = 0; i <= Travels.Count; i++)
+                    {
+                        if (travels[i] == travel)
+                        {
+                            user.RemoveTravel(travel);
+                        }
+                    }
+                }
+            }
+        }
     }
 
+    //Updates travel from old to new travel
     public void UpdateTravel(Travel oldTravel, Travel newTravel)
     {
         oldTravel = newTravel;
     }
+    //Checks if Passport is needed to travel between two countries
     public bool IsPassportNeeded(Countries fromCountry, Countries toCountry)
     {
-        string from = fromCountry.ToString().Replace("_", "");
-        string to = toCountry.ToString().Replace("_", "");
+        string from = fromCountry.ToString();
+        string to = toCountry.ToString();
         MessageBox.Show($"{from} | {to}");
         if (!Enum.IsDefined(typeof(EuroCountries), from))
         {
@@ -54,5 +82,10 @@ public class TravelManager
             return true;
         }
         return false;
+    }
+    //Calculates and returns days between dates
+    public int CalculateTravelDays(DateTime startDate, DateTime endDate)
+    {
+        return endDate.Subtract(startDate).Days + 1;
     }
 }

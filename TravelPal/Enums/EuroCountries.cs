@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace TravelPal.Enums
 {
@@ -8,9 +9,9 @@ namespace TravelPal.Enums
         Belgium,
         Bulgaria,
         Croatia,
-        [Display(Name = "Republic of Cyprus")]
+        [Description("Republic of Cyprus")]
         Republic_of_Cyprus,
-        [Display(Name = "Czech Republic")]
+        [Description("Czech Republic")]
         Czech_Republic,
         Denmark,
         Estonia,

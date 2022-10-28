@@ -9,17 +9,28 @@ public class Travel
     public string Destination { get; set; }
     public Countries Country { get; set; }
     public int Travellers { get; set; }
-    public List<PackingListItem> PackingListItems { get; set; }
+    public List<PackingListItem> PackingList { get; set; } = new();
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public int TravelDays { get; set; }
 
-    public Travel(string destination, Countries country, int travellers)
+    public Travel(string destination, Countries country, int travellers, List<PackingListItem> packingListItems, DateTime startDate, DateTime endDate)
     {
+
         Destination = destination;
         Country = country;
         Travellers = travellers;
+        StartDate = startDate;
+        EndDate = endDate;
         TravelDays = CalculateTravelDays();
+        if (packingListItems == null)
+        {
+            PackingList.Add(new TravelDocument("Passport", false));
+        }
+        else
+        {
+            PackingList = packingListItems;
+        }
     }
 
     public virtual string GetInfo()
@@ -28,11 +39,11 @@ public class Travel
     }
     public void AddPackingListItem(PackingListItem packingListItem)
     {
-        PackingListItems.Add(packingListItem);
+        PackingList.Add(packingListItem);
     }
     private int CalculateTravelDays()
     {
-        return EndDate.Subtract(StartDate).Days;
+        return EndDate.Subtract(StartDate).Days + 1;
     }
 
 }

@@ -14,7 +14,7 @@ namespace TravelPal
     {
         private UserManager userManager;
         private TravelManager travelManager;
-        private List<PackingListItem> packingListItems = new();
+        private List<PackingListItem> packingList = new();
         private TravelDocument passport;
         public AddTravelWindow(UserManager usermanager, TravelManager travelManager)
         {
@@ -32,7 +32,7 @@ namespace TravelPal
         private void UpdateListView()
         {
             lvPackingList.Items.Clear();
-            foreach (PackingListItem packingListItem in packingListItems)
+            foreach (PackingListItem packingListItem in packingList)
             {
                 ListViewItem item = new();
                 item.Content = packingListItem.GetInfo();
@@ -44,8 +44,8 @@ namespace TravelPal
         private void AddPassport()
         {
             passport = new("Passport", true);
-            packingListItems.Add(passport);
-            if (!Enum.IsDefined(typeof(EuroCountries), userManager.SignedInUser.Location.ToString().Replace("_", "")))
+            packingList.Add(passport);
+            if (!Enum.IsDefined(typeof(EuroCountries), userManager.SignedInUser.Location.ToString()))
             {
                 ListViewItem item = new();
                 item.Content = passport.GetInfo();
@@ -68,22 +68,34 @@ namespace TravelPal
             cbTripType.ItemsSource = Enum.GetNames(typeof(TripTypes));
         }
 
-        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        private void ButtonAddTravel_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (txtDestination.Text.Trim().Length > 0)
                 {
-                    if (cbTripVacation.SelectedItem.ToString() == "Trip")
+                    Countries country = (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString());
+                    int travelers = int.Parse(txtTravelers.Text.Trim());
+                    if (travelers < 1) // check if treveler number is at least one(1)
                     {
-                        Countries country = (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString());
+                        throw new FormatException();
+                    }
+                    if (CalendarFromDate.SelectedDate == null || CalendarToDate.SelectedDate == null)//Check if dates are chosen
+                    {
+                        throw new InvalidOperationException("Please select the dates you want travel");
+                    }
+                    else if (CalendarFromDate.SelectedDate.Value >= CalendarToDate.SelectedDate.Value)
+                    {
+                        throw new Exception("The end date must later than start date");
+                    }
+                    DateTime from = (DateTime)CalendarFromDate.SelectedDate;
+                    DateTime to = (DateTime)CalendarToDate.SelectedDate;
+
+
+                    if (cbTripVacation.SelectedItem.ToString() == "Trip")//If trip is chosen create a trip
+                    {
                         TripTypes tripType = (TripTypes)Enum.Parse(typeof(TripTypes), cbTripType.SelectedItem.ToString());
-                        int travelers = int.Parse(txtTravelers.Text.Trim());
-                        if (travelers < 1)
-                        {
-                            throw new FormatException();
-                        }
-                        Trip trip = new(txtDestination.Text, country, travelers, tripType);
+                        Trip trip = new(txtDestination.Text, country, travelers, packingList, from, to, tripType);
                         travelManager.AddTravel(trip);
                         if (userManager.SignedInUser is User)
                         {
@@ -92,15 +104,9 @@ namespace TravelPal
                         }
                         CloseWindow();
                     }
-                    else if (cbTripVacation.SelectedItem.ToString() == "Vacation")
+                    else if (cbTripVacation.SelectedItem.ToString() == "Vacation") // If vacation is chosen create a vacation 
                     {
-                        Countries country = (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString());
-                        int travelers = int.Parse(txtTravelers.Text.Trim());
-                        if (travelers < 1)
-                        {
-                            throw new FormatException();
-                        }
-                        Vacation vacation = new(txtDestination.Text, country, travelers, (bool)CheckBoxAllInclusive.IsChecked);
+                        Vacation vacation = new(txtDestination.Text, country, travelers, packingList, from, to, (bool)CheckBoxAllInclusive.IsChecked);
                         travelManager.AddTravel(vacation);
                         if (userManager.SignedInUser is User)
                         {
@@ -117,8 +123,9 @@ namespace TravelPal
             }
             catch (OverflowException ex) { MessageBox.Show("Number of travelers is too high"); }
             catch (FormatException ex) { MessageBox.Show("Please input a number that corresponds to the number of travelers"); }
+            catch (InvalidOperationException ex) { MessageBox.Show(ex.Message); }
             catch (NullReferenceException ex) { MessageBox.Show("Please input all the information"); }
-            catch (Exception ex) { MessageBox.Show(ex.StackTrace); }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -168,7 +175,7 @@ namespace TravelPal
                     if ((bool)CheckBoxTravelDocument.IsChecked)
                     {
                         TravelDocument travelDocument = new(txtPackingListItem.Text.Trim(), (bool)CheckBoxRequired.IsChecked);
-                        packingListItems.Add(travelDocument);
+                        packingList.Add(travelDocument);
                         ListViewItem item = new();
                         item.Content = travelDocument.GetInfo();
                         item.Tag = travelDocument;
@@ -178,7 +185,7 @@ namespace TravelPal
                     {
                         int quantity = int.Parse(txtQuantity.Text);
                         OtherItem otherItem = new(txtPackingListItem.Text.Trim(), quantity);
-                        packingListItems.Add(otherItem);
+                        packingList.Add(otherItem);
                         ListViewItem item = new();
                         item.Content = otherItem.GetInfo();
                         item.Tag = otherItem;
