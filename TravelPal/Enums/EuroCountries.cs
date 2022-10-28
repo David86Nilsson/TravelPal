@@ -29,6 +29,8 @@ namespace TravelPal.Enums
         Poland,
         Portugal,
         Romania,
+        [Display(Name = "San Marino")]
+        San_Marino,
         Slovakia,
         Slovenia,
         Spain,

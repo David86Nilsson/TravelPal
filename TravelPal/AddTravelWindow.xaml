@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-             Title="Register" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Background="MediumSlateBlue">
+             Title="Register" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Background="MediumSlateBlue" Foreground="MintCream" FontFamily="Arial">
     <Grid Margin="50">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -17,12 +17,19 @@
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
@@ -66,14 +73,36 @@
                 FontSize="30"
                 Foreground="MintCream"
                 />
+            <Label
+                Content="Packinglistitem to add: "
+                Grid.Row="1"
+                Grid.Column="3"
+                Grid.ColumnSpan="3"
+                Foreground="MintCream"
+                FontSize="30"
+                />
+            <Label
+                Content="From: "
+                Grid.Row="7"
+                Grid.Column="0"
+                FontSize="30"
+                Foreground="MintCream"
+                />
+            <Label
+                Content="To: "
+                Grid.Row="7"
+                Grid.Column="1"
+                FontSize="30"
+                Foreground="MintCream"
+                />
             <Button
                 x:Name="ButtonAdd"
                 Content="Add Travel"
                 Width="100"
                 Height="30"
                 HorizontalAlignment="Right"
-                Grid.Row="6"
-                Grid.Column="1"
+                Grid.Row="10"
+                Grid.Column="4"
                 Click="ButtonAdd_Click"
                 />
             <ComboBox
@@ -82,7 +111,7 @@
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right"
+                HorizontalAlignment="Right" SelectionChanged="cbCountries_SelectionChanged"
                 />
             <TextBox
                 x:Name="txtDestination"
@@ -100,6 +129,36 @@
                 Height="30"
                 HorizontalAlignment="Right"
                 />
+            <TextBox
+                x:Name="txtPackingListItem"
+                Grid.Row="2"
+                Grid.Column="3"
+                Grid.ColumnSpan="2"
+                Width="150"
+                Height="30"
+                HorizontalAlignment="Left"
+                />
+            <StackPanel 
+                x:Name="StackPanelNumberofItems"  
+                Grid.Row="4" 
+                Grid.Column="3"
+                Orientation="Horizontal">
+                <TextBox
+                    x:Name="txtQuantity"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                />
+                <Label
+                    x:Name="lblQuantity"
+                    Content="Quantity"
+                    VerticalAlignment="Center"
+                    />
+
+            </StackPanel>
             <ComboBox
                 x:Name="cbTripVacation"
                 Grid.Row="4"
@@ -120,12 +179,21 @@
             <Button
                 x:Name="ButtonCancel"
                 Content="Cancel"
-                Grid.Column="4"
+                Grid.Column="5"
                 Grid.Row="0"
                 Height="30"
                 Width="100"
                 HorizontalAlignment="Right"
                 Click="ButtonCancel_Click"
+                />
+            <Button
+                x:Name="ButtonAddItem"
+                Content="Add Item"
+                Grid.Column="3"
+                Grid.Row="5"
+                Height="30"
+                Width="100"
+                Click="ButtonAddItem_Click"
                 />
             <CheckBox
                 x:Name="CheckBoxAllInclusive"
@@ -134,7 +202,51 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 />
-
+            <CheckBox
+                x:Name="CheckBoxTravelDocument"
+                Content="Document"
+                Grid.Row="3"
+                Grid.Column="3"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Top"
+                Checked="CheckBoxTravelDocument_Checked"
+                Unchecked="CheckBoxTravelDocument_Unchecked"
+                />
+            <CheckBox
+                x:Name="CheckBoxRequired"
+                Content="Required"
+                Grid.Row="4"
+                Grid.Column="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Top"
+                />
+            <ListView
+                x:Name="lvPackingList"               
+                Grid.Row="6"
+                Grid.Column="3"
+                Grid.ColumnSpan="4"
+                Grid.RowSpan="2"
+                Width="500"
+                Height="100"
+                Foreground="MediumSlateBlue"
+                />
+            <Calendar
+                x:Name="CalendarFromDate"
+                SelectionMode="SingleDate"
+                Background="MintCream"
+                Grid.Row="8"
+                Grid.Column="0"
+                Grid.RowSpan="4"
+                />
+            <Calendar
+                x:Name="CalendarToDate"
+                SelectionMode="SingleDate"
+                Grid.Row="8"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="4"
+                />
         </Grid>
         <Label
             Content="TravelPal"
@@ -143,6 +255,6 @@
             Foreground="MintCream"
             HorizontalAlignment="Center"
             />
-        
+
     </Grid>
 </Window>
