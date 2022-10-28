@@ -10,11 +10,6 @@ namespace TravelPal.Models
 
         public Admin(string userName, string password, Countries location)
         {
-            IUser(userName, password, location);
-        }
-
-        public void IUser(string userName, string password, Countries location)
-        {
             UserName = userName;
             Password = password;
             Location = location;
