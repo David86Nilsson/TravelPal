@@ -11,6 +11,7 @@
             Required = required;
         }
 
+        //Returns info about the document
         public string GetInfo()
         {
             if (Required)

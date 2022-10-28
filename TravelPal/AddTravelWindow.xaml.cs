@@ -29,6 +29,7 @@ namespace TravelPal
 
         }
 
+        //Clears and Fills Listview
         private void UpdateListView()
         {
             lvPackingList.Items.Clear();
@@ -41,6 +42,7 @@ namespace TravelPal
             }
         }
 
+        //Adds a passport to packinglist
         private void AddPassport()
         {
             passport = new("Passport", true);
@@ -53,13 +55,14 @@ namespace TravelPal
                 lvPackingList.Items.Add(item);
             }
         }
+        //Hides Triptype and checkboses
         private void HideBoxes()
         {
             cbTripType.Visibility = Visibility.Collapsed;
             CheckBoxAllInclusive.Visibility = Visibility.Collapsed;
             CheckBoxRequired.Visibility = Visibility.Collapsed;
         }
-
+        //Adds objects to Comboboxes 
         private void PopulateComboBoxes()
         {
             cbCountries.ItemsSource = Enum.GetNames(typeof(Countries));
@@ -68,6 +71,7 @@ namespace TravelPal
             cbTripType.ItemsSource = Enum.GetNames(typeof(TripTypes));
         }
 
+        // Adds Travel to user and travelmanager if input is approved
         private void ButtonAddTravel_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -127,11 +131,12 @@ namespace TravelPal
             catch (NullReferenceException ex) { MessageBox.Show("Please input all the information"); }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+        // Closes the current window
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             CloseWindow();
         }
-
+        // Shows Triptype-alternative if travel is a trip, othervise show Allinclusive-alternative
         private void cbTripVacation_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (cbTripVacation.SelectedItem.ToString() == "Trip")
@@ -147,25 +152,26 @@ namespace TravelPal
                 cbTripType.Visibility = Visibility.Collapsed;
             }
         }
+        //Closes the window and opens travelswindow
         private void CloseWindow()
         {
             TravelsWindow travelsWindow = new(userManager, travelManager);
             travelsWindow.Show();
             Close();
         }
-
+        //Event that Shows Required-checkBox and hides Quantity
         private void CheckBoxTravelDocument_Checked(object sender, RoutedEventArgs e)
         {
             CheckBoxRequired.Visibility = Visibility.Visible;
             StackPanelNumberofItems.Visibility = Visibility.Collapsed;
         }
-
+        //Event that shows Quantity and hides Required-checkBox
         private void CheckBoxTravelDocument_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBoxRequired.Visibility = Visibility.Collapsed;
             StackPanelNumberofItems.Visibility = Visibility.Visible;
         }
-
+        //Event that adds item to packinglist
         private void ButtonAddItem_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -201,7 +207,7 @@ namespace TravelPal
             catch (FormatException ex) { MessageBox.Show("Please input a number that corresponds to the quantity"); }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
+        //Clears input from boxes for Add Item
         private void ClearAddItemInputs()
         {
             txtPackingListItem.Clear();
@@ -209,7 +215,7 @@ namespace TravelPal
             CheckBoxTravelDocument.IsChecked = false;
             CheckBoxRequired.IsChecked = false;
         }
-
+        //Changes prop for passport based on if its required or not
         private void cbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (travelManager.IsPassportNeeded(userManager.SignedInUser.Location, (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString())))

@@ -16,15 +16,20 @@ namespace TravelPal.Models
             Password = password;
             Location = location;
         }
+
+        //Adds a travel to the user
         public void AddTravel(Travel travel)
         {
             Travels.Add(travel);
         }
 
+        //Removes a travel from user
         public void RemoveTravel(Travel travel)
         {
             Travels.Remove(travel);
         }
+
+        //Updates a travel from old travel to new travel
         public void UpdateTravel(Travel oldTravel, Travel newTravel)
         {
             int index = Travels.IndexOf(oldTravel);

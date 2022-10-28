@@ -33,14 +33,17 @@ public class Travel
         }
     }
 
+    //Method that returns info about the traveldestination
     public virtual string GetInfo()
     {
         return $"{Destination}";
     }
+    //Method that adds a packinglistItem to travel
     public void AddPackingListItem(PackingListItem packingListItem)
     {
         PackingList.Add(packingListItem);
     }
+    //Calculates days between startDate and endDate
     private int CalculateTravelDays()
     {
         return EndDate.Subtract(StartDate).Days + 1;

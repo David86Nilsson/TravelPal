@@ -58,6 +58,7 @@ public class UserManager
         }
         return false;
     }
+    //Updates password of user
     public bool UpdatePassword(IUser user, string password)
     {
         if (ValidatePassword(password))
@@ -68,6 +69,7 @@ public class UserManager
         return false;
     }
 
+    //Checks if password is approved
     private bool ValidatePassword(string password)
     {
         if (password.Length < 5)
@@ -111,6 +113,7 @@ public class UserManager
         }
         return false;
     }
+    //Returns string with info about failed validation  username and password
     public string GetErrorMessage()
     {
         return errorMessage.ToString();
