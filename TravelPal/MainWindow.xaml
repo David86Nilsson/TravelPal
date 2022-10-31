@@ -56,7 +56,6 @@
             <Button
                 x:Name="ButtonLogIn"
                 Content="Log in"
-                FontSize="20"
                 Grid.Column="1"
                 Grid.Row="2"
                 Width="100"
@@ -64,11 +63,20 @@
                 HorizontalAlignment="Right"
                 Margin="5"
                 Click="ButtonLogIn_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
             <Button
                 x:Name="ButtonRegister"
                 Content="Register"
-                FontSize="20"
                 Grid.Column="1"
                 Grid.Row="3"
                 Width="100"
@@ -76,7 +84,17 @@
                 HorizontalAlignment="Right"
                 Margin="5"
                 Click="ButtonRegister_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </Grid>
         <Label
             Content="TravelPal"

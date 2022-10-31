@@ -204,7 +204,10 @@ namespace TravelPal
                     throw new Exception("Please enter the name of the item you want to add");
                 }
             }
-            catch (FormatException ex) { MessageBox.Show("Please input a number that corresponds to the quantity"); }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Please input a number that corresponds to the quantity");
+            }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         //Clears input from boxes for Add Item
@@ -215,17 +218,10 @@ namespace TravelPal
             CheckBoxTravelDocument.IsChecked = false;
             CheckBoxRequired.IsChecked = false;
         }
-        //Changes prop for passport based on if its required or not
+        //Event that updates required passport prop
         private void cbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (travelManager.IsPassportNeeded(userManager.SignedInUser.Location, (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString())))
-            {
-                passport.Required = true;
-            }
-            else
-            {
-                passport.Required = false;
-            }
+            passport.Required = travelManager.IsPassportNeeded(userManager.SignedInUser.Location, (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString()));
             UpdateListView();
         }
     }

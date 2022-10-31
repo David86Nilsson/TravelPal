@@ -20,6 +20,10 @@ namespace TravelPal
             this.userManager = userManager;
             this.travelManager = travelManager;
             lblUserInfo.Content = userManager.SignedInUser.UserName;
+            if (userManager.SignedInUser is Admin)
+            {
+                ButtonAddTravel.IsEnabled = false;
+            }
             PopulateListView();
         }
 

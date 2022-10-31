@@ -115,7 +115,7 @@
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right"
+                HorizontalAlignment="Right" TextChanged="txtUserName_TextChanged"
                 />
             <TextBox
                 x:Name="txtPassword"

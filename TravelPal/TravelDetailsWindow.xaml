@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-              Title="UserDetails" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Background="MediumSlateBlue">
+              Title="TravelDetails" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Background="MediumSlateBlue">
     <Grid Margin="50">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -25,23 +25,23 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Label
                 Content="Destination: "
                 Grid.Row="1"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
@@ -49,69 +49,69 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Foreground="MintCream"
-                FontSize="30"
+                FontSize="20"
                 />
             <Label
                 Content="Number of travelers: "
                 Grid.Row="3"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
                 Content="Trip or Vacation:"
                 Grid.Row="4"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
                 x:Name ="lblAllInclusiveOrTripType"
                 Grid.Row="5"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
                 Content ="Start Date:"
                 Grid.Row="6"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
                 Content ="End Date:"
                 Grid.Row="7"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
                 Content ="TravelDays:"
                 Grid.Row="8"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
                 x:Name ="lblStartDate"
                 Grid.Row="6"
                 Grid.Column="1"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
                 x:Name ="lblEndDate"
                 Grid.Row="7"
                 Grid.Column="1"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
                 x:Name ="lblTraveldays"
                 Grid.Row="8"
                 Grid.Column="1"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
 
@@ -125,7 +125,17 @@
                 Grid.Row="9"
                 Grid.Column="4"
                 Click="ButtonEditSave_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
             <TextBox
                 x:Name="txtDestination"
                 Grid.Row="1"
@@ -175,7 +185,17 @@
                 Width="100"
                 HorizontalAlignment="Right"
                 Click="ButtonCancel_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
             <CheckBox
                 x:Name="CheckBoxAllInclusive"
                 Grid.Row="5"
@@ -230,7 +250,7 @@
                 Grid.Column="3"
                 Grid.ColumnSpan="3"
                 Foreground="MintCream"
-                FontSize="30"
+                FontSize="20"
                 />
                 <TextBox
                 x:Name="txtPackingListItem"
@@ -276,7 +296,7 @@
                     />
 
                 </StackPanel>
-                
+
                 <Button
                 x:Name="ButtonAddItem"
                 Content="Add Item"
@@ -285,7 +305,17 @@
                 Click="ButtonAddItem_Click"
                 HorizontalAlignment="Left"
                 Margin="0,5,0,0"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
             <StackPanel
                 Grid.Row="5"
@@ -297,7 +327,7 @@
                 Grid.Row="4"
                 Grid.Column="3"
                 Grid.ColumnSpan="2"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
                 <ListView

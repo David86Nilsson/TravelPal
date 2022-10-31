@@ -51,12 +51,19 @@ public class UserManager
     public bool UpdateUserName(IUser user, string userName)
     {
         errorMessage.Clear();
-        if (ValidateUserName(userName))
+        if (user.UserName != userName)
         {
-            user.UserName = userName;
-            return true;
+            if (ValidateUserName(userName))
+            {
+                user.UserName = userName;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
     //Updates password of user
     public bool UpdatePassword(IUser user, string password)
@@ -88,9 +95,9 @@ public class UserManager
             errorMessage.AppendLine("*Username was too short");
             return false;
         }
-        foreach (var user in Users)
+        foreach (IUser iUser in Users)
         {
-            if (userName == user.UserName)
+            if (userName == iUser.UserName)
             {
                 errorMessage.AppendLine("*Username already exists");
                 return false;

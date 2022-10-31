@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using TravelPal.Enums;
 
 namespace TravelPal.Models
@@ -86,11 +88,12 @@ namespace TravelPal.Models
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
+            SetAllTextBoxesToWhite();
             StringBuilder errorMessage = new();
             if (!userManager.UpdateUserName(iUser, txtUserName.Text.Trim()))
             {
                 txtUserName.Clear();
-                errorMessage.Append("\n*UserName must be longer than 3 characters");
+                ChangeTextBoxToErrorColor(txtUserName);
             }
 
             if (txtPassword.Text.Equals(txtConfirmPassword.Text))
@@ -99,14 +102,15 @@ namespace TravelPal.Models
                 {
                     txtPassword.Clear();
                     txtConfirmPassword.Clear();
-                    errorMessage.Append("\n*Password must be at least 5 characters");
+                    ChangeTextBoxToErrorColor(txtPassword);
                 }
             }
             else
             {
-                errorMessage.Append("\n*Password must be the same in both inputs");
+                ChangeTextBoxToErrorColor(txtConfirmPassword);
+                errorMessage.Append("*Password must be the same in both inputs\n");
             }
-
+            errorMessage.Append(userManager.GetErrorMessage());
             if (errorMessage.ToString().Length > 0)
             {
                 MessageBox.Show(errorMessage.ToString());
@@ -119,12 +123,32 @@ namespace TravelPal.Models
             }
         }
 
+        private void SetAllTextBoxesToWhite()
+        {
+            txtUserName.Background = new SolidColorBrush(Colors.White);
+            txtPassword.Background = new SolidColorBrush(Colors.White);
+            txtConfirmPassword.Background = new SolidColorBrush(Colors.White);
+        }
+
+        private void ChangeTextBoxToErrorColor(TextBox textBox)
+        {
+            textBox.Background = new SolidColorBrush(Colors.LightSalmon);
+        }
+
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
 
             TravelsWindow travelsWindow = new(userManager, travelManager);
             travelsWindow.Show();
             Close();
+        }
+
+        private void txtUserName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtUserName.Text.Trim().Length < 5)
+            {
+                txtUserName.Foreground = new SolidColorBrush(Colors.Red);
+            }
         }
     }
 }

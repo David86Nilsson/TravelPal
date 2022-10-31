@@ -131,24 +131,15 @@ namespace TravelPal
                         {
                             TripTypes tripType = (TripTypes)Enum.Parse(typeof(TripTypes), cbTripType.SelectedItem.ToString());
                             Trip trip = new(txtDestination.Text, country, travelers, travel.PackingList, from, to, tripType);
-                            travelManager.UpdateTravel(travel, trip);
-                            if (iUser is User)
-                            {
-                                User user = (User)iUser;
-                                user.UpdateTravel(travel, trip);
-                                travel = trip;
-                            }
+                            travelManager.UpdateTravel(travel, trip, userManager);
+                            travel = trip;
                         }
                         else if (cbTripOrVacation.SelectedItem.ToString() == "Vacation")
                         {
                             Vacation vacation = new(txtDestination.Text, country, travelers, travel.PackingList, from, to, (bool)CheckBoxAllInclusive.IsChecked);
-                            travelManager.UpdateTravel(travel, vacation);
-                            if (iUser is User)
-                            {
-                                User user = (User)iUser;
-                                user.UpdateTravel(travel, vacation);
-                                travel = vacation;
-                            }
+                            travelManager.UpdateTravel(travel, vacation, userManager);
+                            travel = vacation;
+
                         }
                         ButtonEditSave.Content = "Edit";
                         ShowInfo();

@@ -32,6 +32,17 @@ public class Travel
             PackingList = packingListItems;
         }
     }
+    public Travel(string destination, Countries country, int travellers, TravelDocument passport, DateTime startDate, DateTime endDate)
+    {
+
+        Destination = destination;
+        Country = country;
+        Travellers = travellers;
+        StartDate = startDate;
+        EndDate = endDate;
+        PackingList.Add(passport);
+        TravelDays = CalculateTravelDays();
+    }
 
     //Method that returns info about the traveldestination
     public virtual string GetInfo()

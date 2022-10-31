@@ -20,9 +20,9 @@ public class TravelManager
     {
         DateTime start = DateTime.Now;
         DateTime end = DateTime.Now.AddDays(3);
-        Trip trip1 = new("Paris", Enums.Countries.France, 3, null, start, end, Enums.TripTypes.Leisure);
+        Trip trip1 = new("Paris", Enums.Countries.France, 3, new TravelDocument("Passport", false), start, end, Enums.TripTypes.Leisure);
         end = DateTime.Now.AddDays(5);
-        Trip trip2 = new("Sydney", Enums.Countries.Australia, 2, null, start, end, Enums.TripTypes.Work);
+        Trip trip2 = new("Sydney", Enums.Countries.Australia, 2, new TravelDocument("Passport", true), start, end, Enums.TripTypes.Work);
         AddTravel(trip1);
         AddTravel(trip2);
     }
@@ -44,29 +44,40 @@ public class TravelManager
         }
         else // If its a Admin, removes Travel from user 
         {
-            foreach (IUser iUser in userManager.Users)
-            {
-                if (iUser is User)
-                {
-                    User user = (User)iUser;
-                    List<Travel> travels = user.Travels;
-                    for (int i = 0; i <= Travels.Count; i++)
-                    {
-                        if (travels[i] == travel)
-                        {
-                            user.RemoveTravel(travel);
-                        }
-                    }
-                }
-            }
+            GetUserThatHasTravel(travel, userManager).RemoveTravel(travel);
         }
     }
 
+
+
     //Updates travel from old to new travel
-    public void UpdateTravel(Travel oldTravel, Travel newTravel)
+    public void UpdateTravel(Travel oldTravel, Travel newTravel, UserManager userManager)
     {
-        oldTravel = newTravel;
+        if (userManager.SignedInUser is User)
+        {
+            User user = (User)userManager.SignedInUser;
+            user.UpdateTravel(oldTravel, newTravel);
+        }
+        else
+        {
+            GetUserThatHasTravel(oldTravel, userManager).UpdateTravel(oldTravel, newTravel);
+        }
+
+        int index = 0;
+        foreach (Travel t in Travels)
+        {
+            if (t == oldTravel)
+            {
+                break;
+            }
+            else
+            {
+                index++;
+            }
+        }
+        Travels[index] = newTravel;
     }
+
     //Checks if Passport is needed to travel between two countries
     public bool IsPassportNeeded(Countries fromCountry, Countries toCountry)
     {
@@ -87,5 +98,25 @@ public class TravelManager
     public int CalculateTravelDays(DateTime startDate, DateTime endDate)
     {
         return endDate.Subtract(startDate).Days + 1;
+    }
+    private User GetUserThatHasTravel(Travel travel, UserManager userManager)
+    {
+        foreach (IUser iUser in userManager.Users)
+        {
+            if (iUser is User)
+            {
+                User user = (User)iUser;
+                List<Travel> travels = user.Travels;
+                int index = 0;
+                foreach (Travel t in travels)
+                {
+                    if (t == travel)
+                    {
+                        return (User)user;
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

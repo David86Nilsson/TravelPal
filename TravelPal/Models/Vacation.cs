@@ -11,6 +11,10 @@ public class Vacation : Travel
     {
         AllInclusive = allInclusive;
     }
+    public Vacation(string destination, Countries country, int travellers, TravelDocument passport, DateTime startDate, DateTime endDate, bool allInclusive) : base(destination, country, travellers, passport, startDate, endDate)
+    {
+        AllInclusive = allInclusive;
+    }
 
     // returns information about vacation
     public override string GetInfo()
