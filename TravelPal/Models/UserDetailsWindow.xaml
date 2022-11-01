@@ -109,34 +109,14 @@
                 />
 
             <Button
-                x:Name="ButtonEdit"
+                x:Name="ButtonEditSave"
                 Content="Edit"
                 Width="100"
                 Height="30"
                 HorizontalAlignment="Right"
                 Grid.Row="5"
                 Grid.Column="1"
-                Click="ButtonEdit_Click"
-                BorderThickness="5"
-                BorderBrush="MintCream"
-                Background="MediumSlateBlue"
-                Foreground="MintCream"
-                >
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button
-                x:Name="ButtonSave"
-                Content="Save"
-                Width="100"
-                Height="30"
-                HorizontalAlignment="Right"
-                Grid.Row="6"
-                Grid.Column="1"
-                Click="ButtonSave_Click"
+                Click="ButtonEditSave_Click"
                 BorderThickness="5"
                 BorderBrush="MintCream"
                 Background="MediumSlateBlue"

@@ -61,12 +61,6 @@ namespace TravelPal.Models
             txtUserName.Clear();
         }
 
-        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
-        {
-            ShowEditBoxes();
-            HideInfo();
-        }
-
         private void HideInfo()
         {
             lblUserName.Visibility = Visibility.Collapsed;
@@ -86,40 +80,48 @@ namespace TravelPal.Models
             txtUserName.Text = iUser.UserName;
         }
 
-        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        private void ButtonEditSave_Click(object sender, RoutedEventArgs e)
         {
-            SetAllTextBoxesToWhite();
-            StringBuilder errorMessage = new();
-            if (!userManager.UpdateUserName(iUser, txtUserName.Text.Trim()))
+            if (ButtonEditSave.Content.ToString() == "Edit")
             {
-                txtUserName.Clear();
-                ChangeTextBoxToErrorColor(txtUserName);
+                ButtonEditSave.Content = "Save";
+                ShowEditBoxes();
+                HideInfo();
             }
+            else if (ButtonEditSave.Content.ToString() == "Save")
+            {
 
-            if (txtPassword.Text.Equals(txtConfirmPassword.Text))
-            {
-                if (!userManager.UpdatePassword(iUser, txtPassword.Text.Trim()))
+                SetAllTextBoxesToWhite();
+                StringBuilder errorMessage = new();
+                if (!userManager.UpdateUserName(iUser, txtUserName.Text.Trim()))
                 {
-                    txtPassword.Clear();
-                    txtConfirmPassword.Clear();
-                    ChangeTextBoxToErrorColor(txtPassword);
+                    txtUserName.Clear();
+                    ChangeTextBoxToErrorColor(txtUserName);
                 }
-            }
-            else
-            {
-                ChangeTextBoxToErrorColor(txtConfirmPassword);
-                errorMessage.Append("*Password must be the same in both inputs\n");
-            }
-            errorMessage.Append(userManager.GetErrorMessage());
-            if (errorMessage.ToString().Length > 0)
-            {
-                MessageBox.Show(errorMessage.ToString());
-            }
-            else
-            {
-                ClearTextBoxes();
-                HideEditBoxes();
-                ShowInfo();
+
+                if (txtPassword.Text.Equals(txtConfirmPassword.Text))
+                {
+                    if (!userManager.UpdatePassword(iUser, txtPassword.Text.Trim()))
+                    {
+                        txtPassword.Clear();
+                        txtConfirmPassword.Clear();
+                        ChangeTextBoxToErrorColor(txtPassword);
+                    }
+                }
+                else
+                {
+                    ChangeTextBoxToErrorColor(txtConfirmPassword);
+                    errorMessage.Append("*Password must be the same in both inputs\n");
+                }
+                errorMessage.Append(userManager.GetErrorMessage());
+                if (errorMessage.ToString().Length > 0)
+                {
+                    MessageBox.Show(errorMessage.ToString());
+                }
+                else
+                {
+                    ButtonClose_Click(sender, e);
+                }
             }
         }
         private void SetAllTextBoxesToWhite()
