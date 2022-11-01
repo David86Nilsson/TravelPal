@@ -41,7 +41,7 @@
                 Content="Destination: "
                 Grid.Row="1"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
@@ -49,20 +49,20 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Foreground="MintCream"
-                FontSize="30"
+                FontSize="20"
                 />
             <Label
                 Content="Number of travelers: "
                 Grid.Row="3"
                 Grid.Column="0"
                 Foreground="MintCream"
-                FontSize="30"
+                FontSize="20"
                 />
             <Label
                 Content="Trip or Vacation: "
                 Grid.Row="4"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
@@ -70,7 +70,7 @@
                 Content=""
                 Grid.Row="5"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
@@ -79,21 +79,23 @@
                 Grid.Column="3"
                 Grid.ColumnSpan="3"
                 Foreground="MintCream"
-                FontSize="30"
+                FontSize="20"
                 />
             <Label
                 Content="From: "
                 Grid.Row="7"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
+                VerticalAlignment="Bottom"
                 />
             <Label
                 Content="To: "
                 Grid.Row="7"
                 Grid.Column="1"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
+                VerticalAlignment="Bottom"
                 />
             <Button
                 x:Name="ButtonAdd"
@@ -104,14 +106,29 @@
                 Grid.Row="10"
                 Grid.Column="4"
                 Click="ButtonAddTravel_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
             <ComboBox
                 x:Name="cbCountries"
                 Grid.Row="2"
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right" SelectionChanged="cbCountries_SelectionChanged"
+                FontSize="20"
+                HorizontalAlignment="Left" 
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center" 
+                SelectionChanged="cbCountries_SelectionChanged"
+                Foreground="MediumSlateBlue"
                 />
             <TextBox
                 x:Name="txtDestination"
@@ -119,15 +136,23 @@
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right"
+                FontSize="20"
+                HorizontalAlignment="Left" 
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                Foreground="MediumSlateBlue"
                 />
             <TextBox
                 x:Name="txtTravelers"
                 Grid.Row="3"
                 Grid.Column="1"
-                Width="150"
+                Width="30"
                 Height="30"
-                HorizontalAlignment="Right"
+                FontSize="20"
+                HorizontalAlignment="Left" 
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                Foreground="MediumSlateBlue"
                 />
             <TextBox
                 x:Name="txtPackingListItem"
@@ -136,7 +161,11 @@
                 Grid.ColumnSpan="2"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Left"
+                FontSize="20"
+                HorizontalAlignment="Left" 
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                Foreground="MediumSlateBlue"
                 />
             <StackPanel 
                 x:Name="StackPanelNumberofItems"  
@@ -147,15 +176,17 @@
                     x:Name="txtQuantity"
                     Width="30"
                     Height="30"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    HorizontalContentAlignment="Center"
+                    FontSize="20"
+                    HorizontalAlignment="Right" 
+                    HorizontalContentAlignment="Left"
                     VerticalContentAlignment="Center"
+                    Foreground="MediumSlateBlue"
                 />
                 <Label
                     x:Name="lblQuantity"
                     Content="Quantity"
                     VerticalAlignment="Center"
+                    Foreground="MintCream"
                     />
 
             </StackPanel>
@@ -165,8 +196,12 @@
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right" 
-                SelectionChanged="cbTripVacation_SelectionChanged"               
+                FontSize="20"
+                HorizontalAlignment="Left" 
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center" 
+                SelectionChanged="cbTripVacation_SelectionChanged"   
+                Foreground="MediumSlateBlue"
                 />
             <ComboBox
                 x:Name="cbTripType"
@@ -174,7 +209,11 @@
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right"               
+                FontSize="20"
+                HorizontalAlignment="Left" 
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                Foreground="MediumSlateBlue"
                 />
             <Button
                 x:Name="ButtonCancel"
@@ -185,7 +224,17 @@
                 Width="100"
                 HorizontalAlignment="Right"
                 Click="ButtonCancel_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
             <Button
                 x:Name="ButtonAddItem"
                 Content="Add Item"
@@ -194,7 +243,17 @@
                 Height="30"
                 Width="100"
                 Click="ButtonAddItem_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
             <CheckBox
                 x:Name="CheckBoxAllInclusive"
                 Grid.Row="5"
@@ -211,6 +270,7 @@
                 VerticalContentAlignment="Top"
                 Checked="CheckBoxTravelDocument_Checked"
                 Unchecked="CheckBoxTravelDocument_Unchecked"
+                Foreground="MintCream"
                 />
             <CheckBox
                 x:Name="CheckBoxRequired"
@@ -220,6 +280,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Top"
+                Foreground="MintCream"
                 />
             <ListView
                 x:Name="lvPackingList"               
@@ -231,8 +292,14 @@
                 Width="300"
                 Height="100"
                 Foreground="MediumSlateBlue"
-                
-                />
+                Padding="10"
+                >
+                <ListView.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </ListView.Resources>
+            </ListView>
             <Calendar
                 x:Name="CalendarFromDate"
                 SelectionMode="SingleDate"

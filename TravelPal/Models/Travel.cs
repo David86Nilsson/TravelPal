@@ -14,7 +14,7 @@ public class Travel
     public DateTime EndDate { get; set; }
     public int TravelDays { get; set; }
 
-    public Travel(string destination, Countries country, int travellers, List<PackingListItem> packingListItems, DateTime startDate, DateTime endDate)
+    public Travel(string destination, Countries country, int travellers, List<PackingListItem> packingList, DateTime startDate, DateTime endDate)
     {
 
         Destination = destination;
@@ -22,25 +22,7 @@ public class Travel
         Travellers = travellers;
         StartDate = startDate;
         EndDate = endDate;
-        TravelDays = CalculateTravelDays();
-        if (packingListItems == null)
-        {
-            PackingList.Add(new TravelDocument("Passport", false));
-        }
-        else
-        {
-            PackingList = packingListItems;
-        }
-    }
-    public Travel(string destination, Countries country, int travellers, TravelDocument passport, DateTime startDate, DateTime endDate)
-    {
-
-        Destination = destination;
-        Country = country;
-        Travellers = travellers;
-        StartDate = startDate;
-        EndDate = endDate;
-        PackingList.Add(passport);
+        PackingList = packingList;
         TravelDays = CalculateTravelDays();
     }
 

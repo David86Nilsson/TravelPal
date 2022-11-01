@@ -34,7 +34,7 @@
                 Content="Country: "
                 Grid.Row="1"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
@@ -42,13 +42,13 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Foreground="MintCream"
-                FontSize="30"
+                FontSize="20"
                 />
             <Label
                 Content="Password: "
                 Grid.Row="3"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Label
@@ -56,11 +56,11 @@
                 Content="Confirm Password:"
                 Grid.Row="4"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
                 />
             <Button
-                x:Name="ButtonSave"
+                x:Name="ButtonRegister"
                 Content="Register"
                 Width="100"
                 Height="30"
@@ -68,14 +68,28 @@
                 Grid.Row="5"
                 Grid.Column="1"
                 Click="ButtonSave_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
             <ComboBox
                 x:Name="cbCountries"
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right" SelectionChanged="cbCountries_SelectionChanged"
+                FontSize="20"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                HorizontalAlignment="Right" 
+                SelectionChanged="cbCountries_SelectionChanged"
                 />
             <TextBox
                 x:Name="txtUserName"
@@ -83,7 +97,11 @@
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right" TextChanged="txtUserName_TextChanged"
+                FontSize="20"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Left"
+                HorizontalAlignment="Right" 
+                TextChanged="txtUserName_TextChanged"
                 />
             <TextBox
                 x:Name="txtPassword"
@@ -91,6 +109,9 @@
                 Grid.Column="1"
                 Width="150"
                 Height="30"
+                FontSize="20"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Left"
                 HorizontalAlignment="Right"               
                 />
             <TextBox
@@ -99,6 +120,9 @@
                 Grid.Column="1"
                 Width="150"
                 Height="30"
+                FontSize="20"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Left"
                 HorizontalAlignment="Right"               
                 />
             <Button
@@ -110,7 +134,17 @@
                 Width="100"
                 HorizontalAlignment="Right"
                 Click="ButtonCancel_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
         </Grid>
         <Label

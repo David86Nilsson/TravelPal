@@ -217,6 +217,7 @@
                 x:Name="CalendarFromDate"
                 SelectionMode="SingleDate"
                 Background="MintCream"
+                
                 Grid.Row="9"
                 Grid.Column="0"
                 Grid.RowSpan="4"
@@ -235,6 +236,7 @@
                 Grid.RowSpan="4"
                 HorizontalAlignment="Right"
                 SelectedDatesChanged="Calendar_SelectedDatesChanged"
+                Foreground="LemonChiffon"
                 />
             <StackPanel
                 x:Name="StackPanelItem"
@@ -321,7 +323,7 @@
                 Grid.Row="5"
                 Grid.Column="3"
                 Grid.ColumnSpan="3"
-                Grid.RowSpan="3">
+                Grid.RowSpan="4">
                 <Label
                 Content="Packing list: "
                 Grid.Row="4"
@@ -335,7 +337,14 @@
                 HorizontalAlignment="Left"
                 Width="300"
                 Height="100"
-                />
+                Padding="10"
+                >
+                    <ListView.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                    </ListView.Resources>
+                </ListView>
             </StackPanel>
 
         </Grid>

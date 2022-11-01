@@ -37,7 +37,17 @@
                 Height="30"
                 HorizontalAlignment="Center"
                 Margin="5" Click="ButtonUserDetails_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
                 <Button
                 x:Name="ButtonLogOut"
                 Content="Log out"
@@ -47,7 +57,17 @@
                 Width="100"
                 Height="30"
                 Margin="5" Click="ButtonLogOut_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
             <StackPanel
                 Orientation="Horizontal"
@@ -61,7 +81,17 @@
                 HorizontalAlignment="Center"
                 Margin="5" 
                 Click="ButtonTravelDetail_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
                 <Button
                 x:Name="ButtonAddTravel"
                 Content="Add Travel"
@@ -70,7 +100,17 @@
                 HorizontalAlignment="Center"
                 Margin="5"
                 Click="ButtonAddTravel_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
                 <Button
                 x:Name="ButtonRemoveTravel"
                 Content="Remove Travel"
@@ -79,7 +119,17 @@
                 HorizontalAlignment="Center"
                 Margin="5"
                 Click="ButtonRemoveTravel_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
             <Label
                 x:Name="lblUserInfo"
@@ -95,10 +145,19 @@
                 x:Name="lvTravels"
                 Grid.Column="0"
                 Grid.Row="1"
+                Grid.ColumnSpan="2"
                 Width="300"
                 Height="300"
-                HorizontalAlignment="Left"
-                />
+                HorizontalAlignment="Center"
+                Foreground="MediumSlateBlue"
+                Padding="20"
+                >
+                <ListView.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="50"/>
+                    </Style>
+                </ListView.Resources>
+            </ListView>
 
         </Grid>
 

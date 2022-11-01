@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
 using TravelPal.Enums;
 
 namespace TravelPal.Models;
@@ -20,9 +19,14 @@ public class TravelManager
     {
         DateTime start = DateTime.Now;
         DateTime end = DateTime.Now.AddDays(3);
-        Trip trip1 = new("Paris", Enums.Countries.France, 3, new TravelDocument("Passport", false), start, end, Enums.TripTypes.Leisure);
+        List<PackingListItem> passport = new();
+        passport.Add(new TravelDocument("Passport", false));
+        Trip trip1 = new("Paris", Enums.Countries.France, 3, passport, start, end, Enums.TripTypes.Leisure);
+
         end = DateTime.Now.AddDays(5);
-        Trip trip2 = new("Sydney", Enums.Countries.Australia, 2, new TravelDocument("Passport", true), start, end, Enums.TripTypes.Work);
+        passport.Clear();
+        passport.Add(new TravelDocument("Passport", true));
+        Trip trip2 = new("Sydney", Enums.Countries.Australia, 2, passport, start, end, Enums.TripTypes.Work);
         AddTravel(trip1);
         AddTravel(trip2);
     }
@@ -83,7 +87,6 @@ public class TravelManager
     {
         string from = fromCountry.ToString();
         string to = toCountry.ToString();
-        MessageBox.Show($"{from} | {to}");
         if (!Enum.IsDefined(typeof(EuroCountries), from))
         {
             return true;
@@ -107,7 +110,6 @@ public class TravelManager
             {
                 User user = (User)iUser;
                 List<Travel> travels = user.Travels;
-                int index = 0;
                 foreach (Travel t in travels)
                 {
                     if (t == travel)

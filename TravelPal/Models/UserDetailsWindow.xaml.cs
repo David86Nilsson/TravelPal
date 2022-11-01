@@ -122,7 +122,6 @@ namespace TravelPal.Models
                 ShowInfo();
             }
         }
-
         private void SetAllTextBoxesToWhite()
         {
             txtUserName.Background = new SolidColorBrush(Colors.White);
@@ -145,10 +144,20 @@ namespace TravelPal.Models
 
         private void txtUserName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtUserName.Text.Trim().Length < 5)
+            if (txtUserName.Text.Trim().Length <= 3)
             {
                 txtUserName.Foreground = new SolidColorBrush(Colors.Red);
             }
+            else
+            {
+                txtUserName.Foreground = new SolidColorBrush(Colors.Green);
+            }
+        }
+
+        private void cbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Countries country = (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString());
+            userManager.UpdateUserCountry(country);
         }
     }
 }

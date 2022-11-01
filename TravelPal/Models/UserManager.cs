@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using TravelPal.Enums;
 
 namespace TravelPal.Models;
 
@@ -74,6 +75,19 @@ public class UserManager
             return true;
         }
         return false;
+    }
+    public void UpdateUserCountry(Countries country)
+    {
+        SignedInUser.Location = country;
+        if (SignedInUser is User)
+        {
+            User user = (User)SignedInUser;
+            foreach (var travel in user.Travels)// Check if passport is needed for users travels
+            {
+                TravelDocument passport = (TravelDocument)travel.PackingList[0];
+                passport.Required = travelManager.IsPassportNeeded(user.Location, country);
+            }
+        }
     }
 
     //Checks if password is approved

@@ -22,7 +22,7 @@ namespace TravelPal
             lblUserInfo.Content = userManager.SignedInUser.UserName;
             if (userManager.SignedInUser is Admin)
             {
-                ButtonAddTravel.IsEnabled = false;
+                ButtonAddTravel.Visibility = Visibility.Collapsed;
             }
             PopulateListView();
         }

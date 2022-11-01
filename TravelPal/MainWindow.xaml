@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Background="MediumSlateBlue">
+        Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Background="MediumSlateBlue" ResizeMode="NoResize">
     <Grid Margin="50">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -16,48 +16,63 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label
                 Content="Username: "
                 Foreground="MintCream"
-                FontSize="40"
+                FontSize="20"
+                Grid.Column="1"
                 Grid.Row="0"
-                Grid.Column="0"
+                HorizontalAlignment="Right"
+                
                 />
             <Label
                 Content="Password: "
                 Foreground="MintCream"
-                FontSize="40"
+                FontSize="20"
+                Grid.Column="1"
                 Grid.Row="1"
-                Grid.Column="0"
+                HorizontalAlignment="Right"
                 />
             <TextBox
                 x:Name="txtUserName"
-                FontSize="30"
+                Height="40"
+                Width="150"
+                VerticalAlignment="Center"
+                Grid.Column="2"
                 Grid.Row="0"
-                Grid.Column="1"
-                VerticalAlignment="Center"
+                FontSize="20"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Left"
+                HorizontalAlignment="Left"
+                Foreground="MediumSlateBlue"
                 />
-            <PasswordBox
+
+            <StackPanel Grid.Column="2"
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        HorizontalAlignment="Left">
+                <PasswordBox
                 x:Name="pwPassword"
-                FontSize="30"
-                Grid.Row="1"
-                Grid.Column="1"
+                Height="40"
+                Width="150"
+                FontSize="20"
                 VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Left"
+                Foreground="MediumSlateBlue"
                 />
-            <Button
+                <Button
                 x:Name="ButtonLogIn"
                 Content="Log in"
-                Grid.Column="1"
-                Grid.Row="2"
                 Width="100"
                 Height="30"
                 HorizontalAlignment="Right"
@@ -68,13 +83,13 @@
                 Background="MediumSlateBlue"
                 Foreground="MintCream"
                 >
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button
                 x:Name="ButtonRegister"
                 Content="Register"
                 Grid.Column="1"
@@ -89,12 +104,13 @@
                 Background="MediumSlateBlue"
                 Foreground="MintCream"
                 >
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
         </Grid>
         <Label
             Content="TravelPal"

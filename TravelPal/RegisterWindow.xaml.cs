@@ -19,7 +19,7 @@ namespace TravelPal
             this.travelManager = travelManager;
             this.userManager = userManager;
             PopulateComboBox();
-            ButtonSave.IsEnabled = false;
+            ButtonRegister.Visibility = Visibility.Collapsed;
         }
 
         private void PopulateComboBox()
@@ -64,7 +64,7 @@ namespace TravelPal
 
         private void cbCountries_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            ButtonSave.IsEnabled = true;
+            ButtonRegister.Visibility = Visibility.Visible;
         }
 
         private void txtUserName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)

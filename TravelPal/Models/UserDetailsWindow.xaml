@@ -34,51 +34,62 @@
                 Content="Country: "
                 Grid.Row="1"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
                 />
             <Label
                 x:Name= "lblCountry"
                 Grid.Row="1"
                 Grid.Column="1"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
+                VerticalAlignment="Center"
                 />
             <Label
                 x:Name="lblUserNameOrAdminName"
                 Grid.Row="2"
                 Grid.Column="0"
                 Foreground="MintCream"
-                FontSize="30"
+                FontSize="20"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
                 />
             <Label 
                 x:Name="lblUserName"
                 Grid.Row="2"
                 Grid.Column="1"
                 Foreground="MintCream"
-                FontSize="30"
+                FontSize="20"
+                VerticalAlignment="Center"
                 />
             <Label
                 Content="Password: "
                 Grid.Row="3"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
                 />
             <Label
                 x:Name="lblPassword"
                 Grid.Row="3"
                 Grid.Column="1"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
+                VerticalAlignment="Center"
                 />
             <Label
                 x:Name="lblConfirmPassword"
                 Content="Confirm Password:"
                 Grid.Row="4"
                 Grid.Column="0"
-                FontSize="30"
+                FontSize="20"
                 Foreground="MintCream"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
                 />
 
             <Button
@@ -90,7 +101,17 @@
                 Grid.Row="5"
                 Grid.Column="1"
                 Click="ButtonEdit_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
             <Button
                 x:Name="ButtonSave"
                 Content="Save"
@@ -100,14 +121,29 @@
                 Grid.Row="6"
                 Grid.Column="1"
                 Click="ButtonSave_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
             <ComboBox
                 x:Name="cbCountries"
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right"
+                FontSize="20"
+                HorizontalAlignment="Right" 
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                SelectionChanged="cbCountries_SelectionChanged"
+                Foreground="MediumSlateBlue"
                 />
             <TextBox
                 x:Name="txtUserName"
@@ -115,7 +151,12 @@
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right" TextChanged="txtUserName_TextChanged"
+                FontSize="20"
+                HorizontalAlignment="Right" 
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                TextChanged="txtUserName_TextChanged"
+                Foreground="MediumSlateBlue"
                 />
             <TextBox
                 x:Name="txtPassword"
@@ -123,7 +164,12 @@
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right"               
+                FontSize="20"
+                HorizontalAlignment="Right"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                Foreground="MediumSlateBlue"
+                
                 />
             <TextBox
                 x:Name="txtConfirmPassword"
@@ -131,7 +177,11 @@
                 Grid.Column="1"
                 Width="150"
                 Height="30"
-                HorizontalAlignment="Right"               
+                FontSize="20"
+                HorizontalAlignment="Right"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                Foreground="MediumSlateBlue"
                 />
             <Button
                 x:Name="ButtonClose"
@@ -142,7 +192,17 @@
                 Width="100"
                 HorizontalAlignment="Right"
                 Click="ButtonClose_Click"
-                />
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
         </Grid>
         <Label
