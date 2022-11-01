@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="TravelsWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Background="MediumSlateBlue">
+        Title="TravelsWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Background="MediumSlateBlue" ResizeMode="NoResize">
     <Grid Margin="50">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -14,6 +14,22 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions> 
+            <Border BorderBrush="MintCream" BorderThickness="10" CornerRadius="50" Grid.Column="1">
+                <Label
+            Content="TravelPal"
+            FontFamily="Arial"
+            FontSize="70"
+            Foreground="MintCream"
+            HorizontalAlignment="Center"
+            />
+            </Border>
+        </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -159,14 +175,6 @@
                 </ListView.Resources>
             </ListView>
 
-        </Grid>
-
-        <Label
-            Content="TravelPal"
-            FontFamily="Arial"
-            FontSize="80"
-            Foreground="MintCream"
-            HorizontalAlignment="Center"
-            />
+        </Grid >
     </Grid>
 </Window>

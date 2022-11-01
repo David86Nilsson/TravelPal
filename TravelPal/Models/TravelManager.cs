@@ -80,6 +80,7 @@ public class TravelManager
             }
         }
         Travels[index] = newTravel;
+
     }
 
     //Checks if Passport is needed to travel between two countries

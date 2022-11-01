@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-               Title="Register" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Background="MediumSlateBlue">
+               Title="Register" Height="800" Width="1000" WindowStartupLocation="CenterScreen" Background="MediumSlateBlue" ResizeMode="NoResize">
     <Grid Margin="50">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -14,6 +14,22 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="MintCream" BorderThickness="10" CornerRadius="50" Grid.Column="1">
+                <Label
+            Content="TravelPal"
+            FontFamily="Arial"
+            FontSize="70"
+            Foreground="MintCream"
+            HorizontalAlignment="Center"
+            />
+            </Border>
+        </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
@@ -89,6 +105,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Right" 
+                Foreground="MediumSlateBlue"
                 SelectionChanged="cbCountries_SelectionChanged"
                 />
             <TextBox
@@ -101,6 +118,7 @@
                 VerticalContentAlignment="Center"
                 HorizontalContentAlignment="Left"
                 HorizontalAlignment="Right" 
+                Foreground="MediumSlateBlue"
                 TextChanged="txtUserName_TextChanged"
                 />
             <TextBox
@@ -112,7 +130,8 @@
                 FontSize="20"
                 VerticalContentAlignment="Center"
                 HorizontalContentAlignment="Left"
-                HorizontalAlignment="Right"               
+                HorizontalAlignment="Right"      
+                Foreground="MediumSlateBlue"
                 />
             <TextBox
                 x:Name="txtConfirmPassword"
@@ -123,7 +142,8 @@
                 FontSize="20"
                 VerticalContentAlignment="Center"
                 HorizontalContentAlignment="Left"
-                HorizontalAlignment="Right"               
+                HorizontalAlignment="Right" 
+                Foreground="MediumSlateBlue"
                 />
             <Button
                 x:Name="ButtonCancel"
@@ -145,14 +165,6 @@
                     </Style>
                 </Button.Resources>
             </Button>
-
         </Grid>
-        <Label
-            Content="TravelPal"
-            FontFamily="Arial"
-            FontSize="80"
-            Foreground="MintCream"
-            HorizontalAlignment="Center"
-            />
     </Grid>
 </Window>

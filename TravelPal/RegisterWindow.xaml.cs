@@ -36,6 +36,7 @@ namespace TravelPal
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
+            SetTextBoxesToWhite();
             string s = "";
             User newUser = null;
 
@@ -58,6 +59,15 @@ namespace TravelPal
             if (error.Length > 0)
             {
                 MessageBox.Show(error);
+                if (error.Contains("Password"))
+                {
+                    txtPassword.Background = new SolidColorBrush(Colors.LightSalmon);
+                    txtConfirmPassword.Background = new SolidColorBrush(Colors.LightSalmon);
+                }
+                if (error.Contains("Username"))
+                {
+                    txtUserName.Background = new SolidColorBrush(Colors.LightSalmon);
+                }
                 userManager.errorMessage.Clear();
             }
         }
@@ -77,6 +87,12 @@ namespace TravelPal
             {
                 txtUserName.Foreground = new SolidColorBrush(Colors.Red);
             }
+        }
+        private void SetTextBoxesToWhite()
+        {
+            txtUserName.Background = new SolidColorBrush(Colors.White);
+            txtPassword.Background = new SolidColorBrush(Colors.White);
+            txtConfirmPassword.Background = new SolidColorBrush(Colors.White);
         }
     }
 }

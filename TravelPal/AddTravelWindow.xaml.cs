@@ -16,11 +16,13 @@ namespace TravelPal
         private TravelManager travelManager;
         private List<PackingListItem> packingList = new();
         private TravelDocument passport;
+        private User SignedInUser;
         public AddTravelWindow(UserManager usermanager, TravelManager travelManager)
         {
             InitializeComponent();
             this.travelManager = travelManager;
             this.userManager = usermanager;
+            this.SignedInUser = (User)userManager.SignedInUser;
             CalendarFromDate.DisplayDateStart = DateTime.Now;
             CalendarToDate.DisplayDateStart = DateTime.Now;
             AddPassport();
@@ -45,15 +47,19 @@ namespace TravelPal
         //Adds a passport to packinglist
         private void AddPassport()
         {
-            passport = new("Passport", true);
-            packingList.Add(passport);
-            if (!Enum.IsDefined(typeof(EuroCountries), userManager.SignedInUser.Location.ToString()))
+            if (Enum.IsDefined(typeof(EuroCountries), userManager.SignedInUser.Location.ToString()))
             {
-                ListViewItem item = new();
-                item.Content = passport.GetInfo();
-                item.Tag = passport;
-                lvPackingList.Items.Add(item);
+                passport = new("Passport", false);
             }
+            else
+            {
+                passport = new("Passport", true);
+            }
+            packingList.Add(passport);
+            ListViewItem item = new();
+            item.Content = passport.GetInfo();
+            item.Tag = passport;
+            lvPackingList.Items.Add(item);
         }
         //Hides Triptype and checkboses
         private void HideBoxes()
@@ -190,6 +196,10 @@ namespace TravelPal
                     else
                     {
                         int quantity = int.Parse(txtQuantity.Text);
+                        if (quantity < 1)
+                        {
+                            throw new FormatException();
+                        }
                         OtherItem otherItem = new(txtPackingListItem.Text.Trim(), quantity);
                         packingList.Add(otherItem);
                         ListViewItem item = new();
@@ -204,10 +214,8 @@ namespace TravelPal
                     throw new Exception("Please enter the name of the item you want to add");
                 }
             }
-            catch (FormatException ex)
-            {
-                MessageBox.Show("Please input a number that corresponds to the quantity");
-            }
+            catch (OverflowException ex) { MessageBox.Show("Input number was too big"); }
+            catch (FormatException ex) { MessageBox.Show("Please input a number that corresponds to the quantity"); }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         //Clears input from boxes for Add Item

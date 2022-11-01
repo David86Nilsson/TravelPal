@@ -22,6 +22,8 @@ namespace TravelPal
             this.travelManager = travelManager;
             this.travel = travel;
             iUser = userManager.SignedInUser;
+            CalendarFromDate.DisplayDateStart = DateTime.Now;
+            CalendarToDate.DisplayDateStart = DateTime.Now;
             PopulateComboBoxes();
             UpdateListView();
             ShowInfo();
@@ -122,24 +124,21 @@ namespace TravelPal
                         }
                         else if (CalendarFromDate.SelectedDate.Value >= CalendarToDate.SelectedDate.Value)
                         {
-                            throw new Exception("The end date must later than start date");
+                            throw new Exception("The end date must be later than start date");
                         }
-                        DateTime from = (DateTime)CalendarFromDate.SelectedDate;
-                        DateTime to = (DateTime)CalendarToDate.SelectedDate;
 
                         if (cbTripOrVacation.SelectedItem.ToString() == "Trip")
                         {
                             TripTypes tripType = (TripTypes)Enum.Parse(typeof(TripTypes), cbTripType.SelectedItem.ToString());
-                            Trip trip = new(txtDestination.Text, country, travelers, travel.PackingList, from, to, tripType);
+                            Trip trip = new(txtDestination.Text, country, travelers, travel.PackingList, (DateTime)CalendarFromDate.SelectedDate, (DateTime)CalendarToDate.SelectedDate, tripType);
                             travelManager.UpdateTravel(travel, trip, userManager);
                             travel = trip;
                         }
                         else if (cbTripOrVacation.SelectedItem.ToString() == "Vacation")
                         {
-                            Vacation vacation = new(txtDestination.Text, country, travelers, travel.PackingList, from, to, (bool)CheckBoxAllInclusive.IsChecked);
+                            Vacation vacation = new(txtDestination.Text, country, travelers, travel.PackingList, (DateTime)CalendarFromDate.SelectedDate, (DateTime)CalendarToDate.SelectedDate, (bool)CheckBoxAllInclusive.IsChecked);
                             travelManager.UpdateTravel(travel, vacation, userManager);
                             travel = vacation;
-
                         }
                         ButtonEditSave.Content = "Edit";
                         ShowInfo();
@@ -216,7 +215,7 @@ namespace TravelPal
                     if ((bool)CheckBoxTravelDocument.IsChecked)
                     {
                         TravelDocument travelDocument = new(txtPackingListItem.Text.Trim(), (bool)CheckBoxRequired.IsChecked);
-                        travel.PackingList.Add(travelDocument);
+                        travel.AddPackingListItem(travelDocument);
                         ListViewItem item = new();
                         item.Content = travelDocument.GetInfo();
                         item.Tag = travelDocument;
@@ -225,8 +224,12 @@ namespace TravelPal
                     else
                     {
                         int quantity = int.Parse(txtQuantity.Text);
+                        if (quantity < 1)
+                        {
+                            throw new FormatException();
+                        }
                         OtherItem otherItem = new(txtPackingListItem.Text.Trim(), quantity);
-                        travel.PackingList.Add(otherItem);
+                        travel.AddPackingListItem(otherItem);
                         ListViewItem item = new();
                         item.Content = otherItem.GetInfo();
                         item.Tag = otherItem;
@@ -239,6 +242,7 @@ namespace TravelPal
                     throw new Exception("Please enter the name of the item you want to add");
                 }
             }
+            catch (OverflowException ex) { MessageBox.Show("Input number was too big"); }
             catch (FormatException ex) { MessageBox.Show("Please input a number that corresponds to the quantity"); }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -265,6 +269,13 @@ namespace TravelPal
             lblStartDate.Content = startDate.ToShortDateString();
             lblEndDate.Content = endDate.ToShortDateString();
             lblTraveldays.Content = travelManager.CalculateTravelDays(startDate, endDate);
+        }
+
+        private void cbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TravelDocument passport = (TravelDocument)travel.PackingList[0];
+            passport.Required = travelManager.IsPassportNeeded(userManager.SignedInUser.Location, (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString()));
+            UpdateListView();
         }
     }
 }
