@@ -23,6 +23,7 @@ public partial class MainWindow : Window
         this.travelManager = travelManager;
     }
 
+    // Method for checking login info
     private void ButtonLogIn_Click(object sender, RoutedEventArgs e)
     {
         if (userManager.SignInUser(txtUserName.Text.Trim(), pwPassword.Password))
@@ -37,6 +38,7 @@ public partial class MainWindow : Window
         }
     }
 
+    // Opens RegisterWindow and closes current window
     private void ButtonRegister_Click(object sender, RoutedEventArgs e)
     {
         RegisterWindow registerWindow = new(userManager, travelManager);

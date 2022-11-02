@@ -82,7 +82,7 @@ namespace TravelPal
         {
             try
             {
-                if (txtDestination.Text.Trim().Length > 0)
+                if (!String.IsNullOrEmpty(txtDestination.Text.Trim()))
                 {
                     Countries country = (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString());
                     int travelers = int.Parse(txtTravelers.Text.Trim());
@@ -94,35 +94,26 @@ namespace TravelPal
                     {
                         throw new InvalidOperationException("Please select the dates you want travel");
                     }
-                    else if (CalendarFromDate.SelectedDate.Value >= CalendarToDate.SelectedDate.Value)
+                    else if (CalendarFromDate.SelectedDate.Value >= CalendarToDate.SelectedDate.Value)//Check if startdate is before enddate
                     {
-                        throw new Exception("The end date must later than start date");
+                        throw new Exception("The end date must be later than start date");
                     }
-                    DateTime from = (DateTime)CalendarFromDate.SelectedDate;
-                    DateTime to = (DateTime)CalendarToDate.SelectedDate;
-
 
                     if (cbTripVacation.SelectedItem.ToString() == "Trip")//If trip is chosen create a trip
                     {
                         TripTypes tripType = (TripTypes)Enum.Parse(typeof(TripTypes), cbTripType.SelectedItem.ToString());
-                        Trip trip = new(txtDestination.Text, country, travelers, packingList, from, to, tripType);
+                        Trip trip = new(txtDestination.Text, country, travelers, packingList, (DateTime)CalendarFromDate.SelectedDate, (DateTime)CalendarToDate.SelectedDate, tripType);
                         travelManager.AddTravel(trip);
-                        if (userManager.SignedInUser is User)
-                        {
-                            User user = (User)userManager.SignedInUser;
-                            user.AddTravel(trip);
-                        }
+                        User user = (User)userManager.SignedInUser;
+                        user.AddTravel(trip);
                         CloseWindow();
                     }
                     else if (cbTripVacation.SelectedItem.ToString() == "Vacation") // If vacation is chosen create a vacation 
                     {
-                        Vacation vacation = new(txtDestination.Text, country, travelers, packingList, from, to, (bool)CheckBoxAllInclusive.IsChecked);
+                        Vacation vacation = new(txtDestination.Text, country, travelers, packingList, (DateTime)CalendarFromDate.SelectedDate, (DateTime)CalendarToDate.SelectedDate, (bool)CheckBoxAllInclusive.IsChecked);
                         travelManager.AddTravel(vacation);
-                        if (userManager.SignedInUser is User)
-                        {
-                            User user = (User)userManager.SignedInUser;
-                            user.AddTravel(vacation);
-                        }
+                        User user = (User)userManager.SignedInUser;
+                        user.AddTravel(vacation);
                         CloseWindow();
                     }
                 }

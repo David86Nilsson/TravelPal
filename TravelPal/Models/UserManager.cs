@@ -76,17 +76,24 @@ public class UserManager
         }
         return false;
     }
+
+    //Updates Users home country
     public void UpdateUserCountry(Countries country)
     {
         SignedInUser.Location = country;
         if (SignedInUser is User)
         {
             User user = (User)SignedInUser;
-            foreach (var travel in user.Travels)// Check if passport is needed for users travels
-            {
-                TravelDocument passport = (TravelDocument)travel.PackingList[0];
-                passport.Required = travelManager.IsPassportNeeded(user.Location, country);
-            }
+            UpdateUsersPassportReqiurement(user, country);
+        }
+    }
+    // Updates the requirement of passport for the users travels
+    private void UpdateUsersPassportReqiurement(User user, Countries country)
+    {
+        foreach (var travel in user.Travels)
+        {
+            TravelDocument passport = (TravelDocument)travel.PackingList[0];
+            passport.Required = travelManager.IsPassportNeeded(user.Location, travel.Country);
         }
     }
 

@@ -65,6 +65,28 @@
                     </Button.Resources>
                 </Button>
                 <Button
+                x:Name="ButtonInfo"
+                Content="Info"
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                Width="50"
+                Height="30"
+                Margin="5"
+                Click="ButtonInfo_Click"
+                BorderThickness="5"
+                BorderBrush="MintCream"
+                Background="MediumSlateBlue"
+                Foreground="MintCream"
+                    ToolTip="Hej"
+                >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button
                 x:Name="ButtonLogOut"
                 Content="Log out"
                 Grid.Row="0"

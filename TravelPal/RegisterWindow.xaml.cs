@@ -27,13 +27,14 @@ namespace TravelPal
             cbCountries.ItemsSource = Enum.GetNames(typeof(Countries));
         }
 
+        // Closes current window and opens main window
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new(userManager, travelManager);
             mainWindow.Show();
             Close();
         }
-
+        //Checks input info and creates new user
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             SetTextBoxesToWhite();
@@ -44,7 +45,7 @@ namespace TravelPal
             newUser = new(txtUserName.Text, txtPassword.Text, country);
             if (txtPassword.Text == txtConfirmPassword.Text)
             {
-                if (userManager.AddUser(newUser))
+                if (userManager.AddUser(newUser)) // If user is created, window closes and mainWindow opens
                 {
                     MainWindow mainWindow = new(userManager, travelManager);
                     mainWindow.Show();
@@ -56,7 +57,7 @@ namespace TravelPal
                 s = ("*Password differed in input boxes");
             }
             string error = $"{userManager.errorMessage.ToString()}{s}";
-            if (error.Length > 0)
+            if (!String.IsNullOrEmpty(error)) // If there was errors, show errors and chang backgroundcolor in textboxes 
             {
                 MessageBox.Show(error);
                 if (error.Contains("Password"))
@@ -71,12 +72,13 @@ namespace TravelPal
                 userManager.errorMessage.Clear();
             }
         }
-
+        //Show Register button when combobox changes
         private void cbCountries_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             ButtonRegister.Visibility = Visibility.Visible;
         }
 
+        //Changes textColor depending on length of input
         private void txtUserName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             if (txtUserName.Text.Length > 3)
@@ -88,6 +90,7 @@ namespace TravelPal
                 txtUserName.Foreground = new SolidColorBrush(Colors.Red);
             }
         }
+        //Changes background color of Textboxes to white
         private void SetTextBoxesToWhite()
         {
             txtUserName.Background = new SolidColorBrush(Colors.White);

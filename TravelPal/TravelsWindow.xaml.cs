@@ -26,10 +26,10 @@ namespace TravelPal
             }
             PopulateListView();
         }
-
+        // Shows travels in listView
         private void PopulateListView()
         {
-            if (userManager.SignedInUser is User)
+            if (userManager.SignedInUser is User)  // Shows users travels 
             {
                 user = (User)userManager.SignedInUser;
                 foreach (Travel travel in user.Travels)
@@ -42,7 +42,7 @@ namespace TravelPal
             }
             else if (userManager.SignedInUser is Admin)
             {
-                foreach (Travel travel in travelManager.Travels)
+                foreach (Travel travel in travelManager.Travels) // Shows all travels
                 {
                     ListViewItem item = new();
                     item.Content = travel.GetInfo();
@@ -51,32 +51,22 @@ namespace TravelPal
                 }
             }
         }
-
+        // Opens UserDetailsWindow and closes current Window
         private void ButtonUserDetails_Click(object sender, RoutedEventArgs e)
         {
-            if (userManager.SignedInUser is User)
-            {
-                User user = (User)userManager.SignedInUser;
-                UserDetailsWindow userDetailsWindow = new(userManager, travelManager);
-                userDetailsWindow.Show();
-                Close();
-            }
-            else if (userManager.SignedInUser is Admin)
-            {
-                Admin admin = (Admin)userManager.SignedInUser;
-                UserDetailsWindow userDetailsWindow = new(userManager, travelManager);
-                userDetailsWindow.Show();
-                Close();
-            }
-        }
+            UserDetailsWindow userDetailsWindow = new(userManager, travelManager);
+            userDetailsWindow.Show();
+            Close();
 
+        }
+        //Opens Mainwindow and closes current Window
         private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new(userManager, travelManager);
             mainWindow.Show();
             Close();
         }
-
+        // Removes Travel
         private void ButtonRemoveTravel_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -92,14 +82,14 @@ namespace TravelPal
                 MessageBox.Show("You must first choose a travel");
             }
         }
-
+        // Opens AddTravelWindow and closes currentWindow
         private void ButtonAddTravel_Click(object sender, RoutedEventArgs e)
         {
             AddTravelWindow addTravelWindow = new(userManager, travelManager);
             addTravelWindow.Show();
             Close();
         }
-
+        //Opens travelDetailsWindow, shows error if no travel is selected
         private void ButtonTravelDetail_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -116,6 +106,14 @@ namespace TravelPal
             {
                 MessageBox.Show("Please choose a travel to see details for");
             }
+        }
+
+        private void ButtonInfo_Click(object sender, RoutedEventArgs e)
+        {
+            String s = "In this app you can see your travels, add new travels and change your travels\n\n" +
+                "Please Contact David at David86nilsson@gmail.com for more information.\n\n" +
+                "Your can send your letters to our company at 24545, Jepppsagård 10B, Staffantorp \n\n";
+            MessageBox.Show(s, "Info");
         }
     }
 }

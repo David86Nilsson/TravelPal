@@ -29,7 +29,7 @@ namespace TravelPal
             ShowInfo();
             LockBoxes();
         }
-
+        //Fills the listview with packingList
         private void UpdateListView()
         {
             lvPackingList.Items.Clear();
@@ -43,6 +43,7 @@ namespace TravelPal
 
         }
 
+        // Puts alternatives in comboxes
         private void PopulateComboBoxes()
         {
             cbCountries.ItemsSource = Enum.GetNames(typeof(Countries));
@@ -51,6 +52,7 @@ namespace TravelPal
             cbTripType.ItemsSource = Enum.GetNames(typeof(TripTypes));
         }
 
+        // Shows info about travel in boxes 
         private void ShowInfo()
         {
             cbCountries.Text = travel.Country.ToString();
@@ -83,7 +85,7 @@ namespace TravelPal
                 CheckBoxAllInclusive.Visibility = Visibility.Collapsed;
             }
         }
-
+        // Locks boxes so that input isnt possible
         private void LockBoxes()
         {
             txtDestination.IsEnabled = false;
@@ -97,10 +99,10 @@ namespace TravelPal
             StackPanelItem.Visibility = Visibility.Collapsed;
             CheckBoxRequired.Visibility = Visibility.Collapsed;
         }
-
+        // Switches between Edit/Save mode, saves the info if save mode
         private void ButtonEditSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ButtonEditSave.Content.ToString() == "Edit")
+            if (ButtonEditSave.Content.ToString() == "Edit") // Change to edit mode
             {
                 ButtonEditSave.Content = "Save";
                 UnlockBoxes();
@@ -113,7 +115,7 @@ namespace TravelPal
                     {
                         Countries country = (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString());
                         int travelers = int.Parse(txtNumberOfTravelers.Text.Trim());
-                        if (travelers < 1)
+                        if (travelers < 1)  // check if number is at least 1
                         {
                             throw new FormatException();
                         }
@@ -122,7 +124,7 @@ namespace TravelPal
                         {
                             throw new InvalidOperationException("Please select the dates you want travel");
                         }
-                        else if (CalendarFromDate.SelectedDate.Value >= CalendarToDate.SelectedDate.Value)
+                        else if (CalendarFromDate.SelectedDate.Value >= CalendarToDate.SelectedDate.Value) // check if endDate is later that startdate
                         {
                             throw new Exception("The end date must be later than start date");
                         }
@@ -159,6 +161,7 @@ namespace TravelPal
 
         }
 
+        // Method that enables editing info
         private void UnlockBoxes()
         {
             txtDestination.IsEnabled = true;
@@ -173,13 +176,14 @@ namespace TravelPal
             CheckBoxRequired.Visibility = Visibility.Collapsed;
         }
 
+        // Closes current window and opens TravelsWindow
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             TravelsWindow travelsWindow = new(userManager, travelManager);
             travelsWindow.Show();
             Close();
         }
-
+        // Switches between Trip and Vacation boxes
         private void cbTripOrVacation_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (cbTripOrVacation.SelectedItem.ToString() == "Trip")
@@ -193,26 +197,27 @@ namespace TravelPal
                 CheckBoxAllInclusive.Visibility = Visibility.Visible;
             }
         }
-
+        //Shows Required checkbox
         private void CheckBoxTravelDocument_Checked(object sender, RoutedEventArgs e)
         {
             CheckBoxRequired.Visibility = Visibility.Visible;
             StackPanelNumberofItems.Visibility = Visibility.Hidden;
         }
-
+        //Shows Quantity box
         private void CheckBoxTravelDocument_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBoxRequired.Visibility = Visibility.Collapsed;
             StackPanelNumberofItems.Visibility = Visibility.Visible;
         }
 
+        //Add packinglistItem if inputs are correct 
         private void ButtonAddItem_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (txtPackingListItem.Text.Trim().Length > 0)
+                if (!String.IsNullOrEmpty(txtPackingListItem.Text.Trim()))
                 {
-                    if ((bool)CheckBoxTravelDocument.IsChecked)
+                    if ((bool)CheckBoxTravelDocument.IsChecked)  // If Traveldocument
                     {
                         TravelDocument travelDocument = new(txtPackingListItem.Text.Trim(), (bool)CheckBoxRequired.IsChecked);
                         travel.AddPackingListItem(travelDocument);
@@ -222,7 +227,7 @@ namespace TravelPal
                         lvPackingList.Items.Add(item);
                     }
                     else
-                    {
+                    {                                                   // If OtherItem
                         int quantity = int.Parse(txtQuantity.Text);
                         if (quantity < 1)
                         {
@@ -247,6 +252,7 @@ namespace TravelPal
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
+        // Clears inputBoxes for adding PackinglistItem
         private void ClearAddItemInputs()
         {
             txtPackingListItem.Clear();
@@ -254,14 +260,15 @@ namespace TravelPal
             CheckBoxTravelDocument.IsChecked = false;
             CheckBoxRequired.IsChecked = false;
         }
-
+        // When dates in calendars is changed, check if both calendars have selected dates
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CalendarToDate.SelectedDate != null)
+            if (CalendarToDate.SelectedDate != null && CalendarFromDate.SelectedDate != null)
             {
                 UpdateTravelDateInfo();
             }
         }
+        //Updates prop for traveldates
         private void UpdateTravelDateInfo()
         {
             DateTime endDate = (DateTime)CalendarToDate.SelectedDate;
@@ -271,6 +278,7 @@ namespace TravelPal
             lblTraveldays.Content = travelManager.CalculateTravelDays(startDate, endDate);
         }
 
+        // Updates passport requirement for travel when Country changes
         private void cbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TravelDocument passport = (TravelDocument)travel.PackingList[0];

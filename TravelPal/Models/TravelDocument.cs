@@ -14,10 +14,8 @@
         //Returns info about the document
         public string GetInfo()
         {
-            if (Required)
-            {
-                return $"{Name} is required";
-            }
+            if (Required) return $"{Name} is required";
+
             return $"{Name} is not required";
         }
     }

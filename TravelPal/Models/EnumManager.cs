@@ -6,6 +6,7 @@ namespace TravelPal.Models
 {
     public static class EnumManager
     {
+        //Returns Description from Enum value if it exists othervise null
         public static string GetDescription(this Enum value)
         {
             Type type = value.GetType();
