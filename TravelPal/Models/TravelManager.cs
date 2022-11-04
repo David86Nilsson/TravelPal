@@ -61,6 +61,7 @@ public class TravelManager
         {
             User user = (User)userManager.SignedInUser;
             user.UpdateTravel(oldTravel, newTravel);
+            ,
         }
         else
         {
